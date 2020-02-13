@@ -12,7 +12,7 @@ class Game_map:
                 self.towers = []
                 self.lives = 10
                 self.money = 250
-                self.background = pygame.image.load(os.path.join("temp_background2.png"))
+                self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
                 self.background = pygame.transform.scale(self.background, (self.width, self.height))                  
                 #self.clicks = [] #Mouse clicks
         def done(self):
