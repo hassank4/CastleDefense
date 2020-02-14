@@ -28,3 +28,45 @@ Responsibilities:
 
 Collaborators:
 - Projectiles
+
+
+Class name: Projectile
+
+Responsibilities:
+- Create a Projectile
+- Remove it after it hits enemy
+- Check whether the enemy has been hit with the projectile
+- Damage the enemy
+
+Collaborators:
+- Enemy
+
+
+Class name: Defense
+
+Responsibilities:
+- Create a Defense character
+- Obtain the character's id
+- Obtain the character's current health
+- Change the health based on the attack damage taken
+- Obtain the attack damage of the defense character
+- Change the attack damage
+- Check whether it is at max level
+- Update that character's level
+- Obtain the coordinates of the character on the map
+- Update the coordinates of the character
+- Check whether the defense character has died
+
+Collaborators:
+- Projectile
+
+
+Class name: Start
+
+Responsibilities:
+- Create the start screen
+- Display the start screen of the game
+- Able the quit the start screen
+
+Collaborators:
+- Supposed to collaborate with the map class in a future sprint
