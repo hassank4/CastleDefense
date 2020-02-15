@@ -1,3 +1,11 @@
+# System Design 
+
+# Table of Contents
+  - [CRC Cards](#crc-cards)
+  - [Software Architecture Diagram](#software-architecture-diagram)
+
+
+## CRC Cards
 Class name: Tower
 
 Responsibilities:
@@ -28,6 +36,7 @@ Responsibilities:
 
 Collaborators:
 - Projectiles
+- Tower
 
 
 Class name: Projectile
@@ -40,6 +49,7 @@ Responsibilities:
 
 Collaborators:
 - Enemy
+- Defense
 
 
 Class name: Defense
@@ -70,3 +80,8 @@ Responsibilities:
 
 Collaborators:
 - Supposed to collaborate with the map class in a future sprint
+
+
+
+## Software Architecture Diagram
+![uml](https://github.com/UTMCSC301/project-ctrl-alt-elite/tree/master/doc/sprint%201/image/uml.png)
