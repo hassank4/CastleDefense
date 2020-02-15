@@ -84,4 +84,4 @@ Collaborators:
 
 
 ## Software Architecture Diagram
-![uml](https://github.com/UTMCSC301/project-ctrl-alt-elite/tree/master/doc/sprint%201/image/uml.png)
+![uml.png](https://github.com/UTMCSC301/project-ctrl-alt-elite/tree/master/doc/sprint%201/image/uml.png)
