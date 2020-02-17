@@ -9,6 +9,10 @@ class Enemy:
         self.id = id
         self.health = 100
         self.image = image
+        # The initial point
+        self.initial = (497, 2070)
+        # The list of pixels where the Enemy will have to go to
+        self.points = [(395, 905), (255, 873), (179, 807), (156, 686), (236, 576), (341, 543), (450, 497), (495, 393), (516, 293), (635, 209), (951, 206), (1091, 332), (1092, 657), (1181, 786), (1899, 786)]
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"
@@ -23,3 +27,6 @@ class Enemy:
         self.health = self.health - amount
         if(self.health < 0):
             self.health = 0
+
+    def movePath(self): # Function to move through points in self.points
+        pass
