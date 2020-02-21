@@ -33,10 +33,10 @@ class Enemy:
     def getPosition(self):  # Function to get the Enemy position
         return self.points[self.current]
 
-    def moveToNextPoint(self): # Function to move through points in self.points and return whether move was successful or not
+    def moveToNextPoint(self): # Function to move through points in self.points and return a tuple of X and Y changes
         # Checking if the Enemy is already at the last point
         if (self.current == (len(self.points) - 1)):
-            return False
+            return (0, 0)
         else:
             self.current += 1
-            return True
+            return ((self.points[self.current])[0] - (self.points[self.current - 1])[0], (self.points[self.current])[1] - (self.points[self.current - 1])[1])
