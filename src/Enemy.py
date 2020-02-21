@@ -5,10 +5,11 @@ The health of an Enemy can be as high as 1000 or as low as 0.
 """
 
 class Enemy:
-    def __init__(self, id, image): # Constructor to create an Enemy object
+    def __init__(self, id, walk_image, attack_image): # Constructor to create an Enemy object
         self.id = id
         self.health = 100
-        self.image = image
+        self.walk_image = walk_image
+        self.attack_image = attack_image
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"

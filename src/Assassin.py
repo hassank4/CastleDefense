@@ -8,7 +8,7 @@ from Tower import Tower
 
 class Assassin(Enemy):
     def __init__(self, id): # Constructor to create an Enemy object
-        Enemy.__init__(self, id, "Images\assassin_walk.png")
+        Enemy.__init__(self, id, "Images\assassin_walk.png", "Images\assassin_attack.png")
         self.health = 80
 
     def __str__(self): # Function to output Enemy health
