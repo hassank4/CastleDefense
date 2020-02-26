@@ -3,10 +3,13 @@ import os
 import random
 pygame.init()
 
+WIDTH = 1000
+HEIGHT = 600
 class Game_map:
+
         def __init__(self):
-                self.width = 1000
-                self.height = 600
+                self.width = WIDTH
+                self.height = HEIGHT
                 self.win = pygame.display.set_mode((self.width, self.height))
                 self.enemies = []
                 self.towers = []

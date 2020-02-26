@@ -88,6 +88,33 @@ class Defense:
         else:
             return False
 
+    def place(self, x, y):
+        """
+        Makes sure that the defense object is able to be placed down at the current coordinates and then
+        calls set_coordinates to place the defense object down.
+        """
+        # R: 141
+        # G: 126
+        # B: 123
+
+        line_one = [(233, 595, [0, 1]), 
+        (233, 568, [0, 1, 2]), 
+        (180, 534, [1, 2, 3]), 
+        (80, 493, [2, 3, 4, 5]),
+        (40, 416, [3, 4, 5]),
+        (76, 304, [4, 5, 6]),
+        (216, 250, [5, 6, 7]),
+        (289, 92, [6, 7, 8]),
+        (356, 66, [7, 8]),
+        (557, 75, [8, 9]),
+        (651, 183, [8, 9, 10]),
+        (664, 386, [9, 10, 11]),
+        (1063, 400, [11, 12])]
+
+        line_two = [()]
+
+
+
     
 
 
