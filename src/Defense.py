@@ -125,6 +125,27 @@ class Defense:
         (874, 490),
         (1064, 483)] #len = 13
 
+        for i in range(len(line_one)):
+            c_x = line_one[i][0]
+            c_y = line_one[i][1]
+            points = line_one[i][2]
+
+            if (i == 0):
+                if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                    return False
+            else:
+                 if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                    return False
+                elif ((x <= c_x and x >= line_one[i-1][0]) or (y <= c_y and y >= line_one[i-1][1])):
+                    return False
+
+            for j in points:
+                if ((x >= c_x and x <= line_two[j][0]) or (y >= c_y and y <= line_two[j][1])):
+                        return False
+        self.set_coordinates(x, y)
+        return True
+                
+
 
 
     
