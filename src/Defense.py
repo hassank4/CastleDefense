@@ -132,16 +132,21 @@ class Defense:
 
             if (i == 0):
                 if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                    print("can't place here")
                     return False
             else:
                  if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                    print("can't place here")
                     return False
                 elif ((x <= c_x and x >= line_one[i-1][0]) or (y <= c_y and y >= line_one[i-1][1])):
+                    print("can't place here")
                     return False
 
             for j in points:
                 if ((x >= c_x and x <= line_two[j][0]) or (y >= c_y and y <= line_two[j][1])):
-                        return False
+                    print("can't place here")
+                    return False
+                    
         self.set_coordinates(x, y)
         return True
                 
