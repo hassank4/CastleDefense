@@ -3,6 +3,7 @@ import os
 from src.Enemy import Assassin
 from src.Enemy import Mage
 from src.Enemy import Ogre
+pygame.font.init()
 
 # from src.Enemy import Enemy
 pygame.init()
@@ -54,8 +55,16 @@ class Game_map:
 
     def draw(self):
         self.win.blit(self.background, (0, 0))
-        # for p in self.clicks:
-        # pygame.draw.circle(self.win, (255,0,0), (p[0] , p[1]), 5, 0)
+
+        # display enemies
+        for enemy in self.enemies:
+            enemy.draw(self.win)
+
+        # display currency
+        text = self.life_font.render(str(self.money), 1, (255, 255, 255))
+        money = pygame.transform.scale(coins_img, (50, 50))
+        start_x = self.width - life.get_width() - 10
+
         pygame.display.update()
 
 
