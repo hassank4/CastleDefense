@@ -10,6 +10,7 @@ class Enemy:
         self.health = 100
         self.walk_image = walk_image
         self.attack_image = attack_image
+        self.speed = 0
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"
@@ -20,6 +21,9 @@ class Enemy:
     def getId(self): # Function to get the Enemy id
         return self.id
 
+    def getSpeed(self): # Function to get the Enemy id
+        return self.speed
+    
     def subHealth(self, amount): # Function to deduct Enemy health
         self.health = self.health - amount
         if(self.health < 0):
