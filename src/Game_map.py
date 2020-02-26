@@ -34,6 +34,9 @@ class Game_map:
 
                 pygame.quit()
 
+        def create_enemy(self, id_num, img):
+                pass
+
         def draw(self):
                 self.win.blit(self.background, (0,0))
                 #for p in self.clicks:
