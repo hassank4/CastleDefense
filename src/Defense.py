@@ -124,7 +124,7 @@ class Defense:
                  if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
                     print("can't place here")
                     return False
-                elif ((x <= c_x and x >= line_one[i-1][0]) or (y <= c_y and y >= line_one[i-1][1])):
+                 elif ((x <= c_x and x >= line_one[i-1][0]) or (y <= c_y and y >= line_one[i-1][1])):
                     print("can't place here")
                     return False
 

@@ -8,7 +8,6 @@ class Enemy:
     def __init__(self, id, walk_image, attack_image): # Constructor to create an Enemy object
         self.id = id
         self.health = 100
-        self.image = image
         # The list of pixels where the Enemy will have to go to (1000x600)
         self.points = [(258, 595), (236, 524), (141, 488), (82, 420), (111, 329), (232, 282), (270, 150), (341, 114), (498, 114), (566, 172), (566, 373), (615, 441), (984, 441)]
         # The index of the Enemy's current point from the list of points
