@@ -5,7 +5,7 @@ The health of an Enemy can be as high as 1000 or as low as 0.
 """
 
 class Enemy:
-    def __init__(self, id, image): # Constructor to create an Enemy object
+    def __init__(self, id, walk_image, attack_image): # Constructor to create an Enemy object
         self.id = id
         self.health = 100
         self.image = image
@@ -13,6 +13,9 @@ class Enemy:
         self.points = [(258, 595), (236, 524), (141, 488), (82, 420), (111, 329), (232, 282), (270, 150), (341, 114), (498, 114), (566, 172), (566, 373), (615, 441), (984, 441)]
         # The index of the Enemy's current point from the list of points
         self.current = 0
+        self.walk_image = walk_image
+        self.attack_image = attack_image
+        self.speed = 0
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"
@@ -23,6 +26,9 @@ class Enemy:
     def getId(self): # Function to get the Enemy id
         return self.id
 
+    def getSpeed(self): # Function to get the Enemy id
+        return self.speed
+    
     def subHealth(self, amount): # Function to deduct Enemy health
         self.health = self.health - amount
         if(self.health < 0):
