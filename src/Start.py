@@ -15,9 +15,9 @@ class Start():
                 self.width = 1200
                 self.height = 800
                 self.win = pygame.display.set_mode((self.width, self.height))
-                self.background = pygame.image.load(os.path.join("Images/Start-Screen.png"))
+                self.background = pygame.image.load(os.path.join("Images/Start-Screen2.png"))
                 self.background = pygame.transform.scale(self.background, (self.width, self.height))                  
-
+        
         # Method to display the start screen
         def draw(self):
                 self.win.blit(self.background, (0,0))
