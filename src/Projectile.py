@@ -3,7 +3,7 @@ class Projectile:
     Class of the projectile that is shooted by the Defense Object onto an Enemy Object
     """
     
-    def __init__(self, type, damage, hit=False):
+    def __init__(self, type, damage, image, hit=False):
         """
         Creates an instance of the Projectile Class
         type: what type of projectile it is, string
@@ -13,6 +13,7 @@ class Projectile:
         self.damage = damage
         self.hit = hit
         self.exist = True
+        self.image = image
 
     def destroy(self):
         """
@@ -35,3 +36,9 @@ class Projectile:
         Deals damage to the enemy
         """
         enemy.sub_health(self.damage)
+
+    def get_image(self):
+        """
+        Get the image associated with the projectile
+        """
+        return self.image
