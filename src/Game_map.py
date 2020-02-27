@@ -1,8 +1,8 @@
 import pygame
 import os
-from src.Enemy import Assassin
-from src.Enemy import Mage
-from src.Enemy import Ogre
+from src.Assassin import Assassin
+from src.Mage import Mage
+from src.Ogre import Ogre
 
 pygame.font.init()
 
@@ -12,20 +12,23 @@ pygame.init()
 waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 currency_img = pygame.image.load(os.path.join("images", "crystal_1.png"))
 
+WIDTH = 1000
+HEIGHT = 600
+
 
 class Game_map:
     def __init__(self):
-        self.width = 1000
-        self.height = 600
+        self.width = WIDTH
+        self.height = HEIGHT
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
         self.towers = []
         self.lives = 10
         self.money = 250
-        self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
-        self.background = pygame.transform.scale(self.background, (self.width, self.height))
         self.wave = 0
         self.current_wave = waves[self.wave][:]
+        self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
+        self.background = pygame.transform.scale(self.background, (self.width, self.height))
 
     def run(self):
         run = True
@@ -48,20 +51,20 @@ class Game_map:
                 self.current_wave = waves[self.wave]
 
         else:
-            enemy_groups = [Assassin(), Mage(), Ogre()]
+            enemy_groups = [Assassin(0), Mage(0), Ogre(0)]
             for x in range(len(self.current_wave)):
                 if self.current_wave[x] != 0:
                     self.enemies.append(enemy_groups[x])
-                    self.current_group[x] = self.current_group[x] - 1
+                    self.current_wave[x] = self.current_wave[x] - 1
                     break
 
     def draw(self):
         self.win.blit(self.background, (0, 0))
-
+        '''
         # display enemies
         for enemy in self.enemies:
             enemy.draw(self.win)
-
+        '''
         # display currency
         '''
         text = self.life_font.render(str(self.money), 1, (255, 255, 255))
