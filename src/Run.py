@@ -102,7 +102,7 @@ def gameloop():
                 quit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
+                if event.key == pygame.K_ESCAPE:
                     pause = True
                     paused()
 
