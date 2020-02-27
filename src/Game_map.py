@@ -3,12 +3,14 @@ import os
 from src.Enemy import Assassin
 from src.Enemy import Mage
 from src.Enemy import Ogre
+
 pygame.font.init()
 
 # from src.Enemy import Enemy
 pygame.init()
 
 waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
+currency_img = pygame.image.load(os.path.join("images", "crystal_1.png"))
 
 
 class Game_map:
@@ -61,10 +63,11 @@ class Game_map:
             enemy.draw(self.win)
 
         # display currency
+        '''
         text = self.life_font.render(str(self.money), 1, (255, 255, 255))
         money = pygame.transform.scale(coins_img, (50, 50))
         start_x = self.width - life.get_width() - 10
-
+        '''
         pygame.display.update()
 
 
