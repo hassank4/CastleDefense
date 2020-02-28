@@ -3,17 +3,24 @@ import os
 from src.Assassin import Assassin
 from src.Mage import Mage
 from src.Ogre import Ogre
+from src.Menu import Purchase_Menu
 
 pygame.font.init()
-
-# from src.Enemy import Enemy
 pygame.init()
 
-waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
-currency_img = pygame.image.load(os.path.join("images", "crystal_1.png"))
+# images
+currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
+menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (500, 100))
+buy_archer1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/archer1/idle1.png")), (75, 75))
+
+buy_knight1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/knight1/idle1.png")), (75, 75))
+
+buy_wizard1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/wizard1/idle1.png")), (75, 75))
 
 WIDTH = 1000
 HEIGHT = 600
+
+waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 
 
 class Game_map:
@@ -29,12 +36,16 @@ class Game_map:
         self.current_wave = waves[self.wave][:]
         self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
+        self.menu = Purchase_Menu(self.width - 400, self.height, menu_bg)
+        self.menu.add_btn(buy_archer1, "buy_archer1", 500)
+        self.menu.add_btn(buy_knight1, "buy_knight1", 750)
+        self.menu.add_btn(buy_wizard1, "buy_wizard1", 1000)
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
         while run:
-            clock.tick(60)
+            clock.tick(500)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -60,17 +71,22 @@ class Game_map:
 
     def draw(self):
         self.win.blit(self.background, (0, 0))
+
         '''
         # display enemies
         for enemy in self.enemies:
             enemy.draw(self.win)
         '''
         # display currency
-        '''
-        text = self.life_font.render(str(self.money), 1, (255, 255, 255))
-        money = pygame.transform.scale(coins_img, (50, 50))
-        start_x = self.width - life.get_width() - 10
-        '''
+
+        text = pygame.font.SysFont("comicsans",40).render(str(self.money), 1, (255, 255, 255))
+        money = pygame.transform.scale(currency_img, (10, 10))
+
+        self.win.blit(text, (900, 75))
+        self.win.blit(money, (850, 65))
+
+        # draw menu
+        self.menu.draw(self.win)
         pygame.display.update()
 
 
