@@ -10,7 +10,7 @@ pygame.init()
 
 # images
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
-menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (500, 100))
+menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (500, 110))
 buy_archer1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/archer1/idle1.png")), (75, 75))
 
 buy_knight1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/knight1/idle1.png")), (75, 75))
@@ -31,15 +31,15 @@ class Game_map:
         self.enemies = []
         self.towers = []
         self.lives = 10
-        self.money = 250
+        self.money = 1000
         self.wave = 0
         self.current_wave = waves[self.wave][:]
         self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
-        self.menu = Purchase_Menu(self.width - 400, self.height, menu_bg)
-        self.menu.add_btn(buy_archer1, "buy_archer1", 500)
-        self.menu.add_btn(buy_knight1, "buy_knight1", 750)
-        self.menu.add_btn(buy_wizard1, "buy_wizard1", 1000)
+        self.menu = Purchase_Menu(self.width - 250, self.height + 7, menu_bg)
+        self.menu.add_btn(buy_archer1, "buy_archer1", 200)
+        self.menu.add_btn(buy_knight1, "buy_knight1", 300)
+        self.menu.add_btn(buy_wizard1, "buy_wizard1", 400)
 
     def run(self):
         run = True

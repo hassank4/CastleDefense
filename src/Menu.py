@@ -5,7 +5,7 @@ pygame.font.init()
 
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (60, 60))
 
-currency_img2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (30, 30))
+currency_img2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
 
 
 
@@ -113,8 +113,8 @@ class Purchase_Menu(Menu):
 
     def add_btn(self, img, name, cost):
         self.items += 1
-        btn_x = self.x - 40
-        btn_y = self.y - 100 + (self.items - 1) * 120
+        btn_x = self.x - 100 + (self.items - 1) * 130
+        btn_y = self.y - 110
         self.buttons.append(Menu2_Button(btn_x, btn_y, img, name, cost))
 
     def get_item_cost(self, name):
