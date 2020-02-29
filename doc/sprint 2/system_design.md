@@ -33,6 +33,48 @@ Responsibilities:
 Collaborators:
 - Game Map
 
+Class name: Run
+
+Responsibilities:
+- Display the start screen and have the game loop and buttons
+- Will have high scores in a future sprint
+
+Collaborators:
+- Game Map
+
+Class name: Assassin
+
+Parent class: Enemy
+
+Responsibilities:
+- Create an Assassin Enemy
+- Be able to attack the Tower
+
+Collaborators:
+- Tower
+
+Class name: Mage
+
+Parent class: Enemy
+
+Responsibilities:
+- Create a Mage Enemy
+- Be able to attack the Tower
+
+Collaborators:
+- Tower
+
+Class name: Ogre
+
+Parent class: Enemy
+
+Responsibilities:
+- Create an Ogre Enemy
+- Be able to attack the Tower
+
+Collaborators:
+- Tower
+
 Class name: Defense
 
 Defense Subclasses: WeakArcher, IntermediateArcher, StrongArcher, WeakKnight, IntermediateKnight, StrongKnight, WeakWizard, IntermediateWizard, StrongWizard
