@@ -1,12 +1,12 @@
 import pygame
 import os
+
 pygame.init()
 pygame.font.init()
 
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (60, 60))
 
 currency_img2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
-
 
 
 class Button:
@@ -19,18 +19,11 @@ class Button:
         self.width = self.img.get_width()
         self.height = self.img.get_height()
 
-    """
     def click(self, X, Y):
-        
-        returns if the positon has collided with the menu
-        :param X: int
-        :param Y: int
-        :return: bool
-        
-        if X <= self.x + self.width and X >= self.x:
-            if Y <= self.y + self.height and Y >= self.y:
+        if self.x + self.width >= X >= self.x:
+            if self.y + self.height >= Y >= self.y:
                 return True
-        return False"""
+        return False
 
     def draw(self, win):
         win.blit(self.img, (self.x, self.y))
@@ -115,7 +108,7 @@ class Purchase_Menu(Menu):
         self.items += 1
         btn_x = self.x - 100 + (self.items - 1) * 130
         btn_y = self.y - 110
-        self.buttons.append(Menu2_Button(btn_x, btn_y, img, name, cost))
+        self.buttons.append(Menu2_Button(btn_x - 30, btn_y, img, name, cost))
 
     def get_item_cost(self, name):
         """
@@ -137,6 +130,6 @@ class Purchase_Menu(Menu):
         win.blit(self.bg, (self.x - self.bg.get_width() / 2, self.y - 120))
         for item in self.buttons:
             item.draw(win)
-            win.blit(currency_img2, (item.x + 2, item.y + item.height))
+            win.blit(currency_img2, (item.x + 2, item.y + item.height + 3))
             text = self.font.render(str(item.cost), 1, (255, 255, 255))
-            win.blit(text, (item.x + item.width / 2 - text.get_width() / 2 + 7, item.y + item.height + 5))
+            win.blit(text, (item.x + item.width / 2 - text.get_width() / 2 + 10, item.y + item.height + 3))
