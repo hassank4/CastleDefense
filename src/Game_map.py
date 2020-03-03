@@ -57,10 +57,10 @@ class Game_map:
             # self.create_enemy()
 
             mouse_pos = pygame.mouse.get_pos()
+             # if we are dragging a defense onto the map from the purchase menu
             if self.moving_object:
-                #if self.moving_object.place(mouse_pos[0], mouse_pos[1]):
+                #if self.moving_object.place(mouse_pos[0], mouse_pos[1]):  # Check if point is valid for the defense to be placed at
                 self.moving_object.move(mouse_pos[0], mouse_pos[1])
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -68,7 +68,6 @@ class Game_map:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # if you're moving an object and click
                     if self.moving_object:
-                        #if self.moving_object.name in defense_names:
                         self.towers.append(self.moving_object)
 
                         self.moving_object.moving = False
@@ -97,22 +96,18 @@ class Game_map:
                     self.enemies.append(enemy_groups[x])
                     self.current_wave[x] = self.current_wave[x] - 1
                     break
-
+    '''
+    def check_path_dist(self, tower):
+        if '''
     def draw(self):
         self.win.blit(self.background, (0, 0))
 
-        '''
-        # display enemies
-        for enemy in self.enemies:
-            enemy.draw(self.win)
-        '''
         # display currency
-
         text = pygame.font.SysFont("comicsans", 40).render(str(self.money), 1, (0, 0, 0))
         money = pygame.transform.scale(currency_img, (25, 25))
 
         self.win.blit(text, (5, 1))
-        self.win.blit(money, (80, 3))
+        self.win.blit(money, (76, 3))
 
         # draw attack towers
         for tw in self.towers:

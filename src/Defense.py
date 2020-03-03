@@ -19,11 +19,7 @@ class Defense:
         self.y = y_coord
         self.idle_image = idle_image
         self.attack_image = attack_image
-        self.defense_imgs = []
-        self.selected = False
         self.moving = False
-        self.left = True
-        self.archer_count = 0
 
     def get_id(self):
         """
@@ -140,29 +136,16 @@ class Defense:
                 if ((x >= c_x and x <= line_two[j][0]) or (y >= c_y and y <= line_two[j][1])):
                     print("can't place here")
                     return False
-
         self.set_coordinates(x, y)
         return True
 
     def move(self, x, y):
         """
-        moves tower to given x and y
-        :param x: int
-        :param y: int
-        :return: None
+        Move object to given x and y
         """
         self.x = x
         self.y = y
 
-    def draw_radius(self, win):
-        if self.selected:
-            # draw range circle
-            surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
-            pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
-
-            win.blit(surface, (self.x - self.range, self.y - self.range))
-
     def draw(self, win):
-        self.draw_radius(win)
-        archer = pygame.image.load(os.path.join(self.get_idle_image()))
+        archer = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
         win.blit(archer, (self.x - archer.get_width() // 2, self.y - archer.get_height() // 2))
