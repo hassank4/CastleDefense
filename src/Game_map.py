@@ -20,6 +20,8 @@ buy_knight1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defe
 
 buy_wizard1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/wizard1/idle1.png")), (75, 75))
 
+defense_names = ["weak_archer1", "weak_knight1", "weak_wizard1"]
+
 WIDTH = 1000
 HEIGHT = 600
 
@@ -37,6 +39,7 @@ class Game_map:
         self.lives = 10
         self.money = 1000
         self.wave = 0
+        self.moving = False
         self.moving_object = None
         self.current_wave = waves[self.wave][:]
         self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
@@ -54,19 +57,27 @@ class Game_map:
             # self.create_enemy()
 
             mouse_pos = pygame.mouse.get_pos()
+            if self.moving_object:
+                self.moving_object.move(mouse_pos[0], mouse_pos[1])
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    purchase_button = self.menu.get_clicked(mouse_pos[0], mouse_pos[1])
-                    if purchase_button:
-                        print(purchase_button)
+                    # if you're moving an object and click
+                    if self.moving_object:
+                        #if self.moving_object.name in defense_names:
+                        self.towers.append(self.moving_object)
+
+                        self.moving_object.moving = False
+                        self.moving_object = None
+                    else:
+                        purchase_button = self.menu.get_clicked(mouse_pos[0], mouse_pos[1])
+                        if purchase_button:
+                            self.add_defense(purchase_button)
 
             self.draw()
-
-        pygame.quit()
 
     def create_enemy(self):
         if sum(self.current_wave) == 0:
@@ -98,6 +109,14 @@ class Game_map:
         self.win.blit(text, (5, 1))
         self.win.blit(money, (80, 3))
 
+        # draw attack towers
+        for tw in self.towers:
+            tw.draw(self.win)
+
+        # draw moving defense
+        if self.moving_object:
+            self.moving_object.draw(self.win)
+
         # draw menu
         self.menu.draw(self.win)
         pygame.display.update()
@@ -111,7 +130,7 @@ class Game_map:
             obj = object_list[name_list.index(name)]
             self.moving_object = obj
             obj.moving = True
-            self.i = self.i + 1
+            self.i += 1
         except Exception as e:
             print(str(e) + "NOT VALID NAME")
 
