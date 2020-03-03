@@ -58,6 +58,7 @@ class Game_map:
 
             mouse_pos = pygame.mouse.get_pos()
             if self.moving_object:
+                #if self.moving_object.place(mouse_pos[0], mouse_pos[1]):
                 self.moving_object.move(mouse_pos[0], mouse_pos[1])
 
             for event in pygame.event.get():
@@ -73,9 +74,13 @@ class Game_map:
                         self.moving_object.moving = False
                         self.moving_object = None
                     else:
+                        # Purchase defense menu clicked
                         purchase_button = self.menu.get_clicked(mouse_pos[0], mouse_pos[1])
                         if purchase_button:
-                            self.add_defense(purchase_button)
+                            price = self.menu.get_item_cost(purchase_button)
+                            if self.money >= price:
+                                self.money -= price
+                                self.add_defense(purchase_button)
 
             self.draw()
 
