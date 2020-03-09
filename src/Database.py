@@ -24,6 +24,17 @@ class Database:
         # print(score)
         return(score)
 
+    def get_all_docs(self):
+        """Get all documents in database"""
+        docs = []
+        cursor = self.db.scores.find({})
+        for document in cursor:
+            docs.append(document)
+        # print(docs)
+        return(docs)
+
 # db = Database()
 # db.insert("Bik", 24)
+# db.insert("Biks", 31)
 # db.get("Bik")
+# db.get_all_docs()
