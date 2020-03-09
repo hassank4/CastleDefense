@@ -16,7 +16,14 @@ class Database:
             "score": score
         }
         result = self.db.scores.insert_one(record)
-        print("Added {0}'s score to database as {1}".format(name, result.inserted_id))
+        # print("Added {0}'s score to database as {1}".format(name, result.inserted_id))
+
+    def get_score(self, name):
+        """Get a score by name and return it."""
+        score = self.db.scores.find_one({"name": name}).get("score")
+        # print(score)
+        return(score)
 
 # db = Database()
 # db.insert("Bik", 24)
+# db.get("Bik")
