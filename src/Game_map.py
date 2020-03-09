@@ -1,8 +1,8 @@
 import pygame
 import os
-from src.Assassin import Assassin
-from src.Mage import Mage
-from src.Ogre import Ogre
+from Assassin import Assassin
+from Mage import Mage
+from Ogre import Ogre
 
 pygame.font.init()
 
@@ -21,7 +21,7 @@ class Game_map:
         self.width = WIDTH
         self.height = HEIGHT
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = []
+        self.enemies = [Assassin(0)]
         self.towers = []
         self.lives = 10
         self.money = 250
@@ -34,7 +34,7 @@ class Game_map:
         run = True
         clock = pygame.time.Clock()
         while run:
-            clock.tick(60)
+            clock.tick(10)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -65,6 +65,9 @@ class Game_map:
         for enemy in self.enemies:
             enemy.draw(self.win)
         '''
+        for enemy in self.enemies:
+            enemy.draw(self.win)
+            enemy.getPosition()
         # display currency
         '''
         text = self.life_font.render(str(self.money), 1, (255, 255, 255))
