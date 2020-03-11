@@ -25,7 +25,7 @@ class Database:
         return(score)
 
     def get_all_docs(self):
-        """Get all documents in database"""
+        """Get all documents in database."""
         docs = []
         cursor = self.db.scores.find({})
         for document in cursor:
