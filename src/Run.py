@@ -30,6 +30,7 @@ clock = pygame.time.Clock()
  
 backgroundImg = pygame.image.load('Images/Start-Screen2.png')
 
+
 helpMenu1Img = pygame.image.load('Images/Help-Menu1.png')
 helpMenu2Img = pygame.image.load('Images/Help-Menu2.png')
 helpMenu3Img = pygame.image.load('Images/Help-Menu3.png')
@@ -200,14 +201,11 @@ def highscores():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf', 50)
-        TextSurf, TextRect = text_objects("Highscores", largeText)
-        TextRect.center = ((display_width/5),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(highscoreMenuImg, (0, 0))
+      
 
-        make_button("Back to Main", 80, 500, 150, 50, bright_yellow, yellow, start)
-        make_button("Quit", 800, 500, 150, 50, bright_red, red, quitgame)
+        make_button("Back to Main", 40, 20, 150, 50, bright_yellow, yellow, start)
+        make_button("Quit", 830, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
