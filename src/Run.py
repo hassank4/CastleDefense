@@ -30,6 +30,12 @@ clock = pygame.time.Clock()
  
 backgroundImg = pygame.image.load('Images/Start-Screen2.png')
 
+helpMenu1Img = pygame.image.load('Images/Help-Menu1.png')
+helpMenu2Img = pygame.image.load('Images/Help-Menu2.png')
+helpMenu3Img = pygame.image.load('Images/Help-Menu3.png')
+helpMenu4Img = pygame.image.load('Images/Help-Menu4.png')
+helpMenu5Img = pygame.image.load('Images/Help-Menu5.png')
+
 pause = False 
 
 # --------------------------------------------------------------------------------------------
@@ -78,14 +84,11 @@ def helpmenu1():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu 1", largeText)
-        TextRect.center = ((display_width/2),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+    
+        gameDisplay.blit(helpMenu1Img, (0, 0))
 
-        make_button("Next", 10, 500, 150, 50, bright_yellow, yellow, helpmenu2)
-        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 10, 520, 100, 50, bright_yellow, yellow, helpmenu2)
+        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -99,14 +102,10 @@ def helpmenu2():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu 2", largeText)
-        TextRect.center = ((display_width/2),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(helpMenu2Img, (0, 0))
 
-        make_button("Next", 210, 500, 150, 50, bright_yellow, yellow, helpmenu3)
-        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 210, 520, 100, 50, bright_yellow, yellow, helpmenu3)
+        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -120,14 +119,10 @@ def helpmenu3():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu 3", largeText)
-        TextRect.center = ((display_width/2),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(helpMenu3Img, (0, 0))
 
-        make_button("Next", 410, 500, 150, 50, bright_yellow, yellow, helpmenu4)
-        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 410, 520, 100, 50, bright_yellow, yellow, helpmenu4)
+        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -141,14 +136,10 @@ def helpmenu4():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu 4", largeText)
-        TextRect.center = ((display_width/2),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(helpMenu4Img, (0, 0))
 
-        make_button("Next", 610, 500, 150, 50, bright_yellow, yellow, helpmenu5)
-        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 610, 520, 100, 50, bright_yellow, yellow, helpmenu5)
+        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -162,14 +153,10 @@ def helpmenu5():
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu 5", largeText)
-        TextRect.center = ((display_width/2),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(helpMenu5Img, (0, 0))
 
-        make_button("Back to Main", 810, 500, 150, 50, bright_yellow, yellow, start)
-        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+        make_button("Main", 810, 520, 100, 50, bright_yellow, yellow, start)
+        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
