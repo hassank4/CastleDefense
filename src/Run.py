@@ -69,7 +69,7 @@ def message_display(text):
     time.sleep(2)
  
 
-def helpmenu():
+def helpmenu1():
     help = True
 
     while help:
@@ -80,12 +80,96 @@ def helpmenu():
 
         gameDisplay.fill(white)
         largeText = pygame.font.Font('freesansbold.ttf',75)
-        TextSurf, TextRect = text_objects("Help Menu", largeText)
+        TextSurf, TextRect = text_objects("Help Menu 1", largeText)
         TextRect.center = ((display_width/2),(display_height/8))
         gameDisplay.blit(TextSurf, TextRect)
 
-        make_button("Back", 80, 500, 150, 50, bright_yellow, yellow, start)
-        make_button("Quit", 800, 500, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 10, 500, 150, 50, bright_yellow, yellow, helpmenu2)
+        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def helpmenu2():
+    help = True
+
+    while help:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf',75)
+        TextSurf, TextRect = text_objects("Help Menu 2", largeText)
+        TextRect.center = ((display_width/2),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Next", 210, 500, 150, 50, bright_yellow, yellow, helpmenu3)
+        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def helpmenu3():
+    help = True
+
+    while help:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf',75)
+        TextSurf, TextRect = text_objects("Help Menu 3", largeText)
+        TextRect.center = ((display_width/2),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Next", 410, 500, 150, 50, bright_yellow, yellow, helpmenu4)
+        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def helpmenu4():
+    help = True
+
+    while help:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf',75)
+        TextSurf, TextRect = text_objects("Help Menu 4", largeText)
+        TextRect.center = ((display_width/2),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Next", 610, 500, 150, 50, bright_yellow, yellow, helpmenu5)
+        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def helpmenu5():
+    help = True
+
+    while help:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf',75)
+        TextSurf, TextRect = text_objects("Help Menu 5", largeText)
+        TextRect.center = ((display_width/2),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Back to Main", 810, 500, 150, 50, bright_yellow, yellow, start)
+        make_button("Quit", 810, 30, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -189,7 +273,7 @@ def start():
 
         
         make_button("Start Quest!", 150, 370, 150, 50, bright_green, green, gameloop)
-        make_button("Help Menu", 450, 370, 150, 50, bright_yellow, yellow, helpmenu)
+        make_button("Help Menu", 450, 370, 150, 50, bright_yellow, yellow, helpmenu1)
         make_button("Quit", 750, 370, 150, 50, bright_red, red, quitgame)
         make_button("Highscores", 420, 500, 200, 50, bright_blue, blue, highscores)
 
