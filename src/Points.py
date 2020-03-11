@@ -1,6 +1,7 @@
 from src.Assassin import Assassin
 from src.Mage import Mage
 from src.Ogre import Ogre
+from src.Database import Database
 
 
 class Points:
@@ -16,6 +17,7 @@ class Points:
         self.assassin_kills = 0
         self.mage_kills = 0
         self.ogre_kills = 0
+        self.db = Database()
 
     def get_points(self):
         """
@@ -31,7 +33,6 @@ class Points:
             if type(enemy) == Assassin:
                 self.score += 5
                 self.assassin_kills += 1
-                print(type(enemy))
             elif type(enemy) == Mage:
                 self.score += 10
                 self.mage_kills += 1
@@ -54,3 +55,8 @@ class Points:
         """
         return [self.assassin_kills, self.mage_kills, self.ogre_kills]
 
+    def add_total_score(self, name):
+        """
+        Add the final score to the Database.
+        """
+        db.insert(name, self.score)
