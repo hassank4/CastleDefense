@@ -28,7 +28,9 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Castle Defense')
 clock = pygame.time.Clock()
  
-backgroundImg = pygame.image.load('Images/Start-Screen2.png')
+startScreenImg = pygame.image.load('Images/Start-Screen.png')
+
+highscoreMenuImg = pygame.image.load('Images/Highscores-Menu.png')
 
 
 helpMenu1Img = pygame.image.load('Images/Help-Menu1.png')
@@ -250,13 +252,8 @@ def start():
                 pygame.quit()
                 quit()
                 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf',80)
-        TextSurf, TextRect = text_objects("Castle Defense", largeText)
-        TextRect.center = ((display_width/2),(display_height/4))
-        gameDisplay.blit(TextSurf, TextRect)
+        gameDisplay.blit(startScreenImg, (0, 0))
 
-        
         make_button("Start Quest!", 150, 370, 150, 50, bright_green, green, gameloop)
         make_button("Help Menu", 450, 370, 150, 50, bright_yellow, yellow, helpmenu1)
         make_button("Quit", 750, 370, 150, 50, bright_red, red, quitgame)
