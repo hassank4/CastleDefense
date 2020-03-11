@@ -34,7 +34,7 @@ class Button:
 
 
 '''
-This class helps in defining an item to add in the menu where lives, current amount of currency, etc. will be displayed
+This class will be used for creating the menu 
 '''
 
 
