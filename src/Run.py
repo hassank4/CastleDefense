@@ -165,7 +165,7 @@ def helpmenu5():
         clock.tick(15)
 
 
-def gameloop():
+def easygameloop():
     global pause
     gameloop = True
 
@@ -182,17 +182,115 @@ def gameloop():
 
         gameDisplay.fill(white)
         largeText = pygame.font.Font('freesansbold.ttf', 50)
-        TextSurf, TextRect = text_objects("Game Map", largeText)
-        TextRect.center = ((display_width/5),(display_height/8))
+        TextSurf, TextRect = text_objects("Easy Game Map", largeText)
+        TextRect.center = ((display_width/4),(display_height/8))
         gameDisplay.blit(TextSurf, TextRect)
 
         
-        make_button("Game End", 800, 50, 150, 50, bright_yellow, yellow, highscores)
-        make_button("Quit", 800, 150, 150, 50, bright_red, red, quitgame)
+        make_button("Game End", 800, 400, 150, 50, bright_yellow, yellow, highscores)
+        make_button("Quit", 800, 500, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
 
+def mediumgameloop():
+    global pause
+    gameloop = True
+
+    while gameloop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pause = True
+                    paused()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf', 50)
+        TextSurf, TextRect = text_objects("Medium Game Map", largeText)
+        TextRect.center = ((display_width/4),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        
+        make_button("Game End", 800, 400, 150, 50, bright_yellow, yellow, highscores)
+        make_button("Quit", 800, 500, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def hardgameloop():
+    global pause
+    gameloop = True
+
+    while gameloop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pause = True
+                    paused()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf', 50)
+        TextSurf, TextRect = text_objects("Hard Game Map", largeText)
+        TextRect.center = ((display_width/4),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        
+        make_button("Game End", 800, 400, 150, 50, bright_yellow, yellow, highscores)
+        make_button("Quit", 800, 500, 150, 50, bright_red, red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def difficulty():
+    diff = True
+
+    while diff:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf', 50)
+        TextSurf, TextRect = text_objects("Difficulty", largeText)
+        TextRect.center = ((display_width/6),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Easy", 100, 300, 200, 100, bright_green, green, easygameloop)
+        make_button("Medium", 400, 300, 200, 100, bright_yellow, yellow, mediumgameloop)
+        make_button("Hard", 700, 300, 200, 100, bright_red, red, hardgameloop)
+
+        pygame.display.update()
+        clock.tick(15)
+
+def name():
+    name = True
+
+    while name:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.fill(white)
+        largeText = pygame.font.Font('freesansbold.ttf', 50)
+        TextSurf, TextRect = text_objects("Name", largeText)
+        TextRect.center = ((display_width/8),(display_height/8))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Advance", 100, 500, 150, 50, bright_green, green, difficulty)
+
+        pygame.display.update()
+        clock.tick(15)
 
 def highscores():
     highscores = True
@@ -254,7 +352,7 @@ def start():
                 
         gameDisplay.blit(startScreenImg, (0, 0))
 
-        make_button("Start Quest!", 150, 370, 150, 50, bright_green, green, gameloop)
+        make_button("Start Quest!", 150, 370, 150, 50, bright_green, green, name)
         make_button("Help Menu", 450, 370, 150, 50, bright_yellow, yellow, helpmenu1)
         make_button("Quit", 750, 370, 150, 50, bright_red, red, quitgame)
         make_button("Highscores", 420, 500, 200, 50, bright_blue, blue, highscores)
