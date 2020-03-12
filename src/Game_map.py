@@ -7,6 +7,8 @@ from src.Wizard import WeakWizard
 from src.Mage import Mage
 from src.Ogre import Ogre
 from src.Menu import Purchase_Menu
+import random
+
 
 pygame.font.init()
 pygame.init()
@@ -52,7 +54,9 @@ class Game_map:
     def run(self):
         run = True
         clock = pygame.time.Clock()
+        self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
         while run:
+
             clock.tick(500)
             # self.create_enemy()
 
@@ -61,6 +65,7 @@ class Game_map:
             if self.moving_object:
                 #if self.moving_object.place(mouse_pos[0], mouse_pos[1]):  # Check if point is valid for the defense to be placed at
                 self.moving_object.move(mouse_pos[0], mouse_pos[1])
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -84,16 +89,17 @@ class Game_map:
             self.draw()
 
     def create_enemy(self):
+        
         if sum(self.current_wave) == 0:
             if len(self.enemies) == 0:
                 self.wave += 1
                 self.current_wave = waves[self.wave]
 
         else:
-            enemy_groups = [Assassin(0), Mage(0), Ogre(0)]
+        #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
             for x in range(len(self.current_wave)):
                 if self.current_wave[x] != 0:
-                    self.enemies.append(enemy_groups[x])
+         #           self.enemies.append(enemy_groups[x])
                     self.current_wave[x] = self.current_wave[x] - 1
                     break
     '''
@@ -101,6 +107,17 @@ class Game_map:
         if '''
     def draw(self):
         self.win.blit(self.background, (0, 0))
+        '''
+        # display enemies
+        for enemy in self.enemies:
+            enemy.draw(self.win)
+        '''
+        for enemy in self.enemies:
+            enemy.draw(self.win)
+            if enemy.getPosition() == (0,0):
+                del enemy
+                
+            #enemy.getPosition()
 
         # display currency
         text = pygame.font.SysFont("comicsans", 40).render(str(self.money), 1, (0, 0, 0))
