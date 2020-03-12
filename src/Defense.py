@@ -1,3 +1,8 @@
+import os
+
+import pygame
+
+
 class Defense:
     """
     This is the Defense Class that contains the essentials of a defense character in the game.
@@ -14,6 +19,7 @@ class Defense:
         self.y = y_coord
         self.idle_image = idle_image
         self.attack_image = attack_image
+        self.moving = False
 
     def get_id(self):
         """
@@ -65,14 +71,12 @@ class Defense:
         Get the image associated with the character when idled
         """
         return self.idle_image
-      
+
     def get_attack_image(self):
         """
         Get the image associated with the character when attacking
         """
         return self.attack_image
-
-
 
     def place(self, x, y):
         """
@@ -83,33 +87,33 @@ class Defense:
         # G: 126
         # B: 123
 
-        line_one = [(233, 595, [0, 1]), 
-        (233, 568, [0, 1, 2]), 
-        (180, 534, [1, 2, 3]), 
-        (80, 493, [2, 3, 4, 5]),
-        (40, 416, [3, 4, 5]),
-        (76, 304, [4, 5, 6]),
-        (216, 250, [5, 6, 7]),
-        (289, 92, [6, 7, 8]),
-        (356, 66, [7, 8]),
-        (557, 75, [8, 9]),
-        (651, 183, [8, 9, 10]),
-        (664, 386, [9, 10, 11]),
-        (1063, 400, [11, 12])] #len = 13
+        line_one = [(233, 595, [0, 1]),
+                    (233, 568, [0, 1, 2]),
+                    (180, 534, [1, 2, 3]),
+                    (80, 493, [2, 3, 4, 5]),
+                    (40, 416, [3, 4, 5]),
+                    (76, 304, [4, 5, 6]),
+                    (216, 250, [5, 6, 7]),
+                    (289, 92, [6, 7, 8]),
+                    (356, 66, [7, 8]),
+                    (557, 75, [8, 9]),
+                    (651, 183, [8, 9, 10]),
+                    (664, 386, [9, 10, 11]),
+                    (1063, 400, [11, 12])]  # len = 13
 
         line_two = [(318, 598),
-        (317, 551),
-        (268, 478),
-        (154, 440),
-        (132, 394),
-        (156, 355),
-        (292, 293),
-        (327, 172),
-        (546, 162),
-        (562, 387),
-        (648, 482),
-        (874, 490),
-        (1064, 483)] #len = 13
+                    (317, 551),
+                    (268, 478),
+                    (154, 440),
+                    (132, 394),
+                    (156, 355),
+                    (292, 293),
+                    (327, 172),
+                    (546, 162),
+                    (562, 387),
+                    (648, 482),
+                    (874, 490),
+                    (1064, 483)]  # len = 13
 
         for i in range(len(line_one)):
             c_x = line_one[i][0]
@@ -117,14 +121,14 @@ class Defense:
             points = line_one[i][2]
 
             if (i == 0):
-                if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                if ((x >= c_x and x <= line_one[i + 1][0]) or (y >= c_y and y <= line_one[i + 1][1])):
                     print("can't place here")
                     return False
             else:
-                 if ((x >= c_x and x <= line_one[i+1][0]) or (y >= c_y and y <= line_one[i+1][1])):
+                if ((x >= c_x and x <= line_one[i + 1][0]) or (y >= c_y and y <= line_one[i + 1][1])):
                     print("can't place here")
                     return False
-                 elif ((x <= c_x and x >= line_one[i-1][0]) or (y <= c_y and y >= line_one[i-1][1])):
+                elif ((x <= c_x and x >= line_one[i - 1][0]) or (y <= c_y and y >= line_one[i - 1][1])):
                     print("can't place here")
                     return False
 
@@ -132,11 +136,16 @@ class Defense:
                 if ((x >= c_x and x <= line_two[j][0]) or (y >= c_y and y <= line_two[j][1])):
                     print("can't place here")
                     return False
-                    
         self.set_coordinates(x, y)
         return True
-                
 
+    def move(self, x, y):
+        """
+        Move object to given x and y
+        """
+        self.x = x
+        self.y = y
 
-
-  
+    def draw(self, win):
+        archer = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
+        win.blit(archer, (self.x - archer.get_width() // 2, self.y - archer.get_height() // 2))
