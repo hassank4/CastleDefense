@@ -1,8 +1,9 @@
 import pygame
 import os
-from src.Assassin import Assassin
-from src.Mage import Mage
-from src.Ogre import Ogre
+import random
+from Assassin import Assassin
+from Mage import Mage
+from Ogre import Ogre
 
 pygame.font.init()
 
@@ -33,8 +34,9 @@ class Game_map:
     def run(self):
         run = True
         clock = pygame.time.Clock()
+        self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
         while run:
-            clock.tick(60)
+            clock.tick(100)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -45,16 +47,17 @@ class Game_map:
         pygame.quit()
 
     def create_enemy(self):
+        
         if sum(self.current_wave) == 0:
             if len(self.enemies) == 0:
                 self.wave += 1
                 self.current_wave = waves[self.wave]
 
         else:
-            enemy_groups = [Assassin(0), Mage(0), Ogre(0)]
+        #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
             for x in range(len(self.current_wave)):
                 if self.current_wave[x] != 0:
-                    self.enemies.append(enemy_groups[x])
+         #           self.enemies.append(enemy_groups[x])
                     self.current_wave[x] = self.current_wave[x] - 1
                     break
 
@@ -65,6 +68,12 @@ class Game_map:
         for enemy in self.enemies:
             enemy.draw(self.win)
         '''
+        for enemy in self.enemies:
+            enemy.draw(self.win)
+            if enemy.getPosition() == (0,0):
+                del enemy
+                
+            #enemy.getPosition()
         # display currency
         '''
         text = self.life_font.render(str(self.money), 1, (255, 255, 255))
