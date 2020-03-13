@@ -32,7 +32,6 @@ startScreenImg = pygame.image.load('Images/Start-Screen.png')
 
 highscoreMenuImg = pygame.image.load('Images/Highscores-Menu.png')
 
-
 helpMenu1Img = pygame.image.load('Images/Help-Menu1.png')
 helpMenu2Img = pygame.image.load('Images/Help-Menu2.png')
 helpMenu3Img = pygame.image.load('Images/Help-Menu3.png')
