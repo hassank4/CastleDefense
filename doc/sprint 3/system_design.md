@@ -23,3 +23,33 @@ Responsibilities:
 
 Collaborators:
 - Run
+
+Class name: Points
+
+Responsibilites:
+- Create a points object that is used by the game map
+- Obtain the current amount of points acquired by the user
+- Add to the score depending on what emeny is killed
+- Reset the amount of kills and score for when the user plays again
+- Update the kill counts depending on which enemy is killed
+- Obtain the kill counts for the three enemy types
+- Add the final score to the database
+
+Collaborators:
+- Assassin
+- Mage
+- Ogre
+- Database
+
+Class name: Run
+
+Responsibilites:
+- Display help screens for how to play the game
+- Display the highscore screen after the game is over
+- Able to pause and resume the game
+- Allow the user to select the difficulty of the game
+
+Class name: Defense
+
+Responsibilites:
+- Able to display the defense character on the game map window
