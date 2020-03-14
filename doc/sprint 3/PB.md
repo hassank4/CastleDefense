@@ -3,13 +3,6 @@
 
 # User Stories:
 
-**Class for Difficulty and name of player**
-Description: As a player, I want to be able to choose which difficulty I want to play the game in.
-
-Points: 5 
-
-Priority: 4
-
 **Make the projectiles able to hit enemies**
 
 Description: As a player, I would like to be able to have my projectiles actually damage an enemy.
@@ -36,6 +29,14 @@ Priority: 2
             
 
 # Completed:
+
+**Class for Difficulty and name of player**
+
+Description: As a player, I want to be able to choose which difficulty I want to play the game in.
+
+Points: 5 
+
+Priority: 4
 
 **Class for the Map of the game**
 
