@@ -7,6 +7,7 @@ from src.Wizard import WeakWizard
 from src.Mage import Mage
 from src.Ogre import Ogre
 from src.Menu import Purchase_Menu
+from src.Tower import Tower
 import random
 
 
@@ -15,13 +16,13 @@ pygame.init()
 
 # images
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
-menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (400, 110))
+menu_backg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (400, 110))
 buy_archer1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/archer1/idle1.png")), (75, 75))
 
 buy_knight1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/knight1/idle1.png")), (75, 75))
 
 buy_wizard1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/wizard1/idle1.png")), (75, 75))
-
+tower_img = pygame.transform.scale(pygame.image.load(os.path.join("images/main_tower.png")), (200,200))
 defense_names = ["weak_archer1", "weak_knight1", "weak_wizard1"]
 
 WIDTH = 1000
@@ -43,10 +44,12 @@ class Game_map:
         self.wave = 0
         self.moving = False
         self.moving_object = None
+        self.tower = None
+        self.main_tower = Tower(tower_img)
         self.current_wave = waves[self.wave][:]
         self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
-        self.menu = Purchase_Menu(self.width - 200, self.height + 7, menu_bg)
+        self.menu = Purchase_Menu(self.width - 200, self.height + 7, menu_backg)
         self.menu.add_btn(buy_archer1, "buy_archer1", 200)
         self.menu.add_btn(buy_knight1, "buy_knight1", 300)
         self.menu.add_btn(buy_wizard1, "buy_wizard1", 400)
@@ -85,6 +88,12 @@ class Game_map:
                             if self.money >= price:
                                 self.money -= price
                                 self.add_defense(purchase_button)
+
+                        if self.main_tower.click(mouse_pos[0], mouse_pos[1]):
+                            print("Main Tower clicked")
+                            self.main_tower.selected = True
+                            self.tower = self.main_tower
+
 
             self.draw()
 
@@ -136,8 +145,12 @@ class Game_map:
 
         # draw menu
         self.menu.draw(self.win)
-        pygame.display.update()
 
+
+        #draw main tower
+        self.main_tower.draw(self.win)
+
+        pygame.display.update()
     def add_defense(self, name):
         x, y = pygame.mouse.get_pos()
         name_list = ["buy_archer1", "buy_knight1", "buy_wizard1"]
