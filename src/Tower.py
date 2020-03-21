@@ -2,7 +2,9 @@ from src.Menu import Menu
 import pygame
 import os
 
-menu_backg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (400, 110))
+menu_backg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (120, 30))
+tower_health_bar = pygame.transform.scale(pygame.image.load(os.path.join("images", "health_bar-06.png")), (100, 10))
+
 
 class Tower:
     """
@@ -12,7 +14,9 @@ class Tower:
         """Initialize a Tower."""
         self.health = 100
         self.img_path = img_path
-        self.menu = Menu(self, 790, 210, menu_backg, [2000, "MAX"])
+        self.menu2 = Menu(self, 770, 280, menu_backg, 0)
+        self.menu2.add_btn(tower_health_bar, "tower health")
+
         self.selected = False
 
     def __str__(self):
@@ -35,8 +39,8 @@ class Tower:
         """Returns if tower has been clicked on and selects tower if it was clicked"""
 
         img = self.img_path
-        if 790 - img.get_width() // 2 + self.width >= X >= 790 - img.get_width() // 2:
-            if 210 + self.height - img.get_height() // 2 >= Y >= 210 - img.get_height() // 2:
+        if 790 <= X <= 790 + img.get_width():
+            if 210 <= Y <= 210 + img.get_height():
                 return True
         return False
 
@@ -47,5 +51,5 @@ class Tower:
 
         # draw menu
         if self.selected:
-            self.menu.draw(win)
+            self.menu2.draw(win)
 

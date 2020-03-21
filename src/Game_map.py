@@ -90,9 +90,12 @@ class Game_map:
                                 self.add_defense(purchase_button)
 
                         if self.main_tower.click(mouse_pos[0], mouse_pos[1]):
-                            print("Main Tower clicked")
-                            self.main_tower.selected = True
-                            self.tower = self.main_tower
+
+                            if not self.main_tower.selected :
+                                self.main_tower.selected = True
+                                self.tower = self.main_tower
+                            else:
+                                self.main_tower.selected = False
 
 
             self.draw()
