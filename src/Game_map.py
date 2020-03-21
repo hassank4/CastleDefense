@@ -1,5 +1,7 @@
 import pygame
 import os
+import random
+import time
 from src.Assassin import Assassin
 from src.Knight import WeakKnight
 from src.Archer import WeakArcher
@@ -7,7 +9,7 @@ from src.Wizard import WeakWizard
 from src.Mage import Mage
 from src.Ogre import Ogre
 from src.Menu import Purchase_Menu
-import random
+
 
 
 pygame.font.init()
@@ -39,6 +41,7 @@ class Game_map:
         self.enemies = []
         self.towers = []
         self.lives = 10
+        self.time = time.time()
         self.money = 1000
         self.wave = 0
         self.moving = False
@@ -54,9 +57,11 @@ class Game_map:
     def run(self):
         run = True
         clock = pygame.time.Clock()
-        self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
-        while run:
 
+        while run:
+            if time.time() - self.time > 2:
+                self.time = time.time()
+                self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
             clock.tick(500)
             # self.create_enemy()
 
@@ -94,7 +99,6 @@ class Game_map:
             if len(self.enemies) == 0:
                 self.wave += 1
                 self.current_wave = waves[self.wave]
-
         else:
         #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
             for x in range(len(self.current_wave)):
