@@ -1,6 +1,10 @@
 import pygame
 import time
 import random
+
+
+
+import tkinter as tk
  
 pygame.init()
 
@@ -272,24 +276,38 @@ def difficulty():
         clock.tick(15)
 
 def name():
+
     name = True
+    userName = []
 
     while name:
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:                
+                keys = pygame.key.name(event.key)
+
+                if(keys.isalpha or keys.isdigit):
+                    userName.append(keys)
+            
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
         gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf', 50)
-        TextSurf, TextRect = text_objects("Name", largeText)
-        TextRect.center = ((display_width/8),(display_height/8))
-        gameDisplay.blit(TextSurf, TextRect)
+
+        final = ''
+
+        for s in userName:
+            final += s
+
+        print(final)
+
 
         make_button("Advance", 100, 500, 150, 50, bright_green, green, difficulty)
 
         pygame.display.update()
         clock.tick(15)
+
+
 
 def highscores():
     highscores = True
