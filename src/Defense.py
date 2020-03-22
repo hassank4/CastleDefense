@@ -158,7 +158,7 @@ class Defense:
         archer = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
         win.blit(archer, (self.x - archer.get_width() // 2, self.y - archer.get_height() // 2))
 
-    def attack(self, enemies):
+    def attack(self, enemies, points):
         self.inRange = False
         closest_enemies = []
         for enemy in enemies:
@@ -177,5 +177,6 @@ class Defense:
                 self.timer = time.time()
                 if first_enemy.subHealth(self.attack_damage):
                     enemies.remove(first_enemy)
+                    points.update_score(first_enemy)
 
             # if first_enemy.x < self.x:
