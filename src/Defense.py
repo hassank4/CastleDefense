@@ -170,12 +170,12 @@ class Defense:
                 closest_enemies.append(enemy)
 
         closest_enemies.sort(key=lambda x: x.x)
-        if len(closest_enemies > 0):
+        if len(closest_enemies) > 0:
             first_enemy = closest_enemies[0]
             
             if time.time() - self.timer >= 0.5:
                 self.timer = time.time()
-                if first_enemy.deduct_health(self.attack_damage):
+                if first_enemy.subHealth(self.attack_damage):
                     enemies.remove(first_enemy)
 
             # if first_enemy.x < self.x:
