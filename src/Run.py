@@ -1,6 +1,7 @@
 import pygame
 import time
 import random
+from Database.py import Database
  
 pygame.init()
 
@@ -301,7 +302,10 @@ def highscores():
                 quit()
 
         gameDisplay.blit(highscoreMenuImg, (0, 0))
-      
+
+        # Getting a list of all high scores from the database
+        db = Database()
+        lst = db.get_all_docs()
 
         make_button("Back to Main", 40, 20, 150, 50, bright_yellow, yellow, start)
         make_button("Quit", 830, 20, 150, 50, bright_red, red, quitgame)
