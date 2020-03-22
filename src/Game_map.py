@@ -86,6 +86,9 @@ class Game_map:
                                 self.money -= price
                                 self.add_defense(purchase_button)
 
+            for tower in self.towers:
+                tower.attack(self.enemies)
+
             self.draw()
 
     def create_enemy(self):
