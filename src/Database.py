@@ -36,5 +36,5 @@ class Database:
 # db = Database()
 # db.insert("Bik", 24)
 # db.insert("Biks", 31)
-# db.get("Bik")
+# db.get_score("Bik")
 # db.get_all_docs()
