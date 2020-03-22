@@ -34,10 +34,13 @@ class Enemy:
     def getSpeed(self): # Function to get the Enemy id
         return self.speed
     
-    def subHealth(self, amount): # Function to deduct Enemy health
+    def subHealth(self, amount): # Function to deduct Enemy health, if dead return true else return false
         self.health = self.health - amount
         if(self.health < 0):
             self.health = 0
+        if self.health == 0:
+            return True
+        return False
 
     def getPosition(self):  # Function to get the Enemy position
         # return self.points[self.current]
