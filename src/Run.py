@@ -1,6 +1,7 @@
 import pygame
 import time
 import random
+import Database
  
 pygame.init()
 
@@ -23,7 +24,7 @@ bright_yellow = (255, 255, 51)
 block_color = (53,115,255)
 
 # --------------------------------------------------------------------------------------------
- 
+db = Database()
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Castle Defense')
 clock = pygame.time.Clock()
@@ -41,8 +42,7 @@ helpMenu5Img = pygame.image.load('Images/Help-Menu5.png')
 pause = False 
 
 # --------------------------------------------------------------------------------------------
- 
-
+db = Database()
 def make_button(message, x, y, width, height, active_col, inactive_col, action):
 
     mouse = pygame.mouse.get_pos()
@@ -301,7 +301,9 @@ def highscores():
                 quit()
 
         gameDisplay.blit(highscoreMenuImg, (0, 0))
-      
+
+        # Getting a list of all high scores from the database
+        scores_lst = db.get_all_docs()
 
         make_button("Back to Main", 40, 20, 150, 50, bright_yellow, yellow, start)
         make_button("Quit", 830, 20, 150, 50, bright_red, red, quitgame)
