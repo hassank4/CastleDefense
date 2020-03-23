@@ -26,8 +26,11 @@ bright_yellow = (255, 255, 51)
  
 block_color = (53,115,255)
 
-player_name = ''
-final = ''
+pause = False 
+playerName = ''
+
+db = Database()
+
 
 # --------------------------------------------------------------------------------------------
 
@@ -48,10 +51,12 @@ helpMenu5Img = pygame.image.load('Images/Help-Menu5.png')
 
 pauseMenuImg = pygame.image.load('Images/Pause-Menu.png')
 
-pause = False 
+nameMenuImg = pygame.image.load('Images/Name-Screen.png')
+
+confirmNameMenuImg = pygame.image.load('Images/Confirm-Name-Menu.png')
+
 
 # --------------------------------------------------------------------------------------------
-db = Database()
 
 def make_button(message, x, y, width, height, active_col, inactive_col, action):
 
@@ -175,10 +180,18 @@ def helpmenu5():
 
 
 def gameloop():
+
     global pause
+    global playerName
+
     gameloop = True
 
-    print('player name was:' +  final)
+    # insert player into the database
+    db.insert(playerName, 0)
+
+    playerName = ''
+
+    # print('player name was:' +  playerName)
 
     while gameloop:
         for event in pygame.event.get():
@@ -209,7 +222,9 @@ def gameloop():
 def name():
 
     name = True
-    userName = []
+    global playerName
+
+    playerName = ''
 
     while name:
         for event in pygame.event.get():
@@ -217,28 +232,43 @@ def name():
                 keys = pygame.key.name(event.key)
 
                 if(keys.isalpha or keys.isdigit):
-                    userName.append(keys)
+                    playerName += keys
             
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        gameDisplay.fill(white)
+        gameDisplay.blit(nameMenuImg, (0, 0))
 
-
-        final = ''
-
-        for s in userName:
-            final += s
-
-        print(final)
-
-
-        make_button("Advance", 100, 500, 150, 50, bright_green, green, gameloop)
+        make_button("Advance", 440, 500, 150, 50, bright_green, green, confirm_name)
 
         pygame.display.update()
         clock.tick(15)
-   
+
+def confirm_name():
+    
+    confirm = True
+    global playerName
+
+    while confirm:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.blit(confirmNameMenuImg, (0, 0))
+
+        largeText = pygame.font.Font('freesansbold.ttf', 30)
+
+        TextSurf, TextRect = text_objects(playerName, largeText)
+        TextRect.center = (600, 340)
+        gameDisplay.blit(TextSurf, TextRect)
+
+        make_button("Confirm", 600, 500, 150, 50, bright_green, green, gameloop)
+        make_button("No, go back!", 100, 500, 150, 50, bright_red, red, name)
+
+        pygame.display.update()
+        clock.tick(15)
 
 
 def highscores():
@@ -255,11 +285,32 @@ def highscores():
         # Getting a list of all high scores from the database
         scores_lst = db.get_all_docs()
 
+
+        largeText = pygame.font.Font('freesansbold.ttf', 30)
+
+        for i in range(len(scores_lst)):
+            name = scores_lst[i].get("name")
+            score = str(scores_lst[i].get("score"))
+
+            x = 300
+            y = 150
+
+
+            TextSurf, TextRect = text_objects(name, largeText)
+            TextRect.center = (x, (i * 50) + y)
+            gameDisplay.blit(TextSurf, TextRect)
+
+            TextSurf, TextRect = text_objects(score, largeText)
+            TextRect.center = (x + 500, (i * 50) + y)
+            gameDisplay.blit(TextSurf, TextRect)
+
+        
         make_button("Back to Main", 40, 20, 150, 50, bright_yellow, yellow, start)
         make_button("Quit", 830, 20, 150, 50, bright_red, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
+    
 
 
 def quitgame():
