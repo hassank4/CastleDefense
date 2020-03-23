@@ -29,9 +29,9 @@ HEIGHT = 600
 
 waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 
-
 class Game_map:
     def __init__(self):
+        self.game = True
         self.width = WIDTH
         self.height = HEIGHT
         self.i = 0
@@ -71,6 +71,7 @@ class Game_map:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+                    self.game = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # if you're moving an object and click
@@ -95,9 +96,15 @@ class Game_map:
                                 self.tower = self.main_tower
                             else:
                                 self.main_tower.selected = False
-
+    
             for tower in self.towers:
                 tower.attack(self.enemies)
+
+            if self.main_tower.get_health() <= 0:
+                print("Tower health = 0")
+                run = False
+                self.game = False
+
 
             self.draw()
 
@@ -173,3 +180,4 @@ class Game_map:
 
 g = Game_map()
 g.run()
+
