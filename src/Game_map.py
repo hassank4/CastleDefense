@@ -31,7 +31,7 @@ waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 
 class Game_map:
     def __init__(self):
-        self.game = True
+        self.game = True #variable to check if game has ended
         self.width = WIDTH
         self.height = HEIGHT
         self.i = 0
@@ -96,7 +96,7 @@ class Game_map:
                                 self.tower = self.main_tower
                             else:
                                 self.main_tower.selected = False
-    
+
             for tower in self.towers:
                 tower.attack(self.enemies)
 
@@ -104,7 +104,6 @@ class Game_map:
                 print("Tower health = 0")
                 run = False
                 self.game = False
-
 
             self.draw()
 
