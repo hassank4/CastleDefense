@@ -155,8 +155,8 @@ class Defense:
         self.y = y
 
     def draw(self, win):
-        archer = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
-        win.blit(archer, (self.x - archer.get_width() // 2, self.y - archer.get_height() // 2))
+        defense = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
+        win.blit(defense, (self.x - defense.get_width() // 2, self.y - defense.get_height() // 2))
 
     def attack(self, enemies, points):
         self.inRange = False
@@ -180,3 +180,4 @@ class Defense:
                     points.update_score(first_enemy)
 
             # if first_enemy.x < self.x:
+
