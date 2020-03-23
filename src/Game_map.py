@@ -59,10 +59,10 @@ class Game_map:
         clock = pygame.time.Clock()
 
         while run:
-            if time.time() - self.time > 2:
+            if time.time() - self.time > 5:
                 self.time = time.time()
                 self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
-            clock.tick(500)
+            clock.tick(50)
             # self.create_enemy()
 
             mouse_pos = pygame.mouse.get_pos()
