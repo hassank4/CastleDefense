@@ -3,6 +3,7 @@ import os
 from src.Assassin import Assassin
 from src.Knight import WeakKnight
 from src.Archer import WeakArcher
+from src.Points import Points
 from src.Wizard import WeakWizard
 from src.Mage import Mage
 from src.Ogre import Ogre
@@ -50,6 +51,7 @@ class Game_map:
         self.menu.add_btn(buy_archer1, "buy_archer1", 200)
         self.menu.add_btn(buy_knight1, "buy_knight1", 300)
         self.menu.add_btn(buy_wizard1, "buy_wizard1", 400)
+        self.points = Points()
 
     def run(self):
         run = True
@@ -87,7 +89,7 @@ class Game_map:
                                 self.add_defense(purchase_button)
 
             for tower in self.towers:
-                tower.attack(self.enemies)
+                tower.attack(self.enemies, self.points)
 
             self.draw()
 
