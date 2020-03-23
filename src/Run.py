@@ -224,48 +224,45 @@ def name():
     name = True
     global playerName
 
+    isLimitExceeded = False
+
     playerName = ''
 
+    gameDisplay.blit(nameMenuImg, (0, 0))
+
     while name:
+        
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:                
                 keys = pygame.key.name(event.key)
 
-                if(keys.isalpha or keys.isdigit):
-                    playerName += keys
+                if(keys.isalpha() or keys.isdigit()):
+                    if(keys == 'backspace'):
+                        isLimitExceeded = False
+                        playerName = playerName[:-1]
+                    elif(len(playerName) > 20):
+                        isLimitExceeded = True
+                    elif(keys == 'space') and (not isLimitExceeded):
+                        playerName += ' '
+                    elif(not isLimitExceeded):
+                        playerName += keys
+
+
+                    largeText = pygame.font.Font('freesansbold.ttf', 30)
+                    
+                    TextSurf, TextRect = text_objects(playerName, largeText)
+                    TextRect.center = (600, 340)
+                    gameDisplay.blit(nameMenuImg, (0, 0))
+                    gameDisplay.blit(TextSurf, TextRect)
+
             
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        gameDisplay.blit(nameMenuImg, (0, 0))
-
-        make_button("Advance", 440, 500, 150, 50, bright_green, green, confirm_name)
-
-        pygame.display.update()
-        clock.tick(15)
-
-def confirm_name():
-    
-    confirm = True
-    global playerName
-
-    while confirm:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-
-        gameDisplay.blit(confirmNameMenuImg, (0, 0))
-
-        largeText = pygame.font.Font('freesansbold.ttf', 30)
-
-        TextSurf, TextRect = text_objects(playerName, largeText)
-        TextRect.center = (600, 340)
-        gameDisplay.blit(TextSurf, TextRect)
-
-        make_button("Confirm", 600, 500, 150, 50, bright_green, green, gameloop)
-        make_button("No, go back!", 100, 500, 150, 50, bright_red, red, name)
+        #gameDisplay.blit(nameMenuImg, (0, 0))
+        if (len(playerName) > 0):
+            make_button("Advance", 440, 500, 150, 50, bright_green, green, gameloop)
 
         pygame.display.update()
         clock.tick(15)
@@ -292,7 +289,7 @@ def highscores():
             name = scores_lst[i].get("name")
             score = str(scores_lst[i].get("score"))
 
-            x = 300
+            x = 370
             y = 150
 
 
@@ -301,7 +298,7 @@ def highscores():
             gameDisplay.blit(TextSurf, TextRect)
 
             TextSurf, TextRect = text_objects(score, largeText)
-            TextRect.center = (x + 500, (i * 50) + y)
+            TextRect.center = (x + 450, (i * 50) + y)
             gameDisplay.blit(TextSurf, TextRect)
 
         
