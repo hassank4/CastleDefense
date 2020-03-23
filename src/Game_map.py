@@ -3,25 +3,26 @@ import os
 from src.Assassin import Assassin
 from src.Knight import WeakKnight
 from src.Archer import WeakArcher
+from src.Points import Points
 from src.Wizard import WeakWizard
 from src.Mage import Mage
 from src.Ogre import Ogre
 from src.Menu import Purchase_Menu
+from src.Tower import Tower
 import random
-
 
 pygame.font.init()
 pygame.init()
 
 # images
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
-menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (400, 110))
+menu_backg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (400, 110))
 buy_archer1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/archer1/idle1.png")), (75, 75))
 
 buy_knight1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/knight1/idle1.png")), (75, 75))
 
 buy_wizard1 = pygame.transform.scale(pygame.image.load(os.path.join("images/defense/wizard1/idle1.png")), (75, 75))
-
+tower_img = pygame.transform.scale(pygame.image.load(os.path.join("images/main_tower.png")), (200, 200))
 defense_names = ["weak_archer1", "weak_knight1", "weak_wizard1"]
 
 WIDTH = 1000
@@ -29,9 +30,9 @@ HEIGHT = 600
 
 waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 
-
 class Game_map:
     def __init__(self):
+        self.game = True #variable to check if game has ended
         self.width = WIDTH
         self.height = HEIGHT
         self.i = 0
@@ -43,13 +44,16 @@ class Game_map:
         self.wave = 0
         self.moving = False
         self.moving_object = None
+        self.tower = None
+        self.main_tower = Tower(tower_img)
         self.current_wave = waves[self.wave][:]
         self.background = pygame.image.load(os.path.join("images", "temp_background.png"))
         self.background = pygame.transform.scale(self.background, (self.width, self.height))
-        self.menu = Purchase_Menu(self.width - 200, self.height + 7, menu_bg)
+        self.menu = Purchase_Menu(self.width - 200, self.height + 7, menu_backg)
         self.menu.add_btn(buy_archer1, "buy_archer1", 200)
         self.menu.add_btn(buy_knight1, "buy_knight1", 300)
         self.menu.add_btn(buy_wizard1, "buy_wizard1", 400)
+        self.points = Points()
 
     def run(self):
         run = True
@@ -61,14 +65,15 @@ class Game_map:
             # self.create_enemy()
 
             mouse_pos = pygame.mouse.get_pos()
-             # if we are dragging a defense onto the map from the purchase menu
+            # if we are dragging a defense onto the map from the purchase menu
             if self.moving_object:
-                #if self.moving_object.place(mouse_pos[0], mouse_pos[1]):  # Check if point is valid for the defense to be placed at
+                # if self.moving_object.place(mouse_pos[0], mouse_pos[1]):  # Check if point is valid for the defense to be placed at
                 self.moving_object.move(mouse_pos[0], mouse_pos[1])
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+                    self.game = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # if you're moving an object and click
@@ -86,28 +91,43 @@ class Game_map:
                                 self.money -= price
                                 self.add_defense(purchase_button)
 
+                        if self.main_tower.click(mouse_pos[0], mouse_pos[1]):
+
+                            if not self.main_tower.selected:
+                                self.main_tower.selected = True
+                                self.tower = self.main_tower
+                            else:
+                                self.main_tower.selected = False
+
             for tower in self.towers:
-                tower.attack(self.enemies)
+                tower.attack(self.enemies, self.points)
+
+            if self.main_tower.get_health() <= 0:
+                print("Tower health = 0")
+                run = False
+                self.game = False
 
             self.draw()
 
     def create_enemy(self):
-        
+
         if sum(self.current_wave) == 0:
             if len(self.enemies) == 0:
                 self.wave += 1
                 self.current_wave = waves[self.wave]
 
         else:
-        #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
+            #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
             for x in range(len(self.current_wave)):
                 if self.current_wave[x] != 0:
-         #           self.enemies.append(enemy_groups[x])
+                    #           self.enemies.append(enemy_groups[x])
                     self.current_wave[x] = self.current_wave[x] - 1
                     break
+
     '''
     def check_path_dist(self, tower):
         if '''
+
     def draw(self):
         self.win.blit(self.background, (0, 0))
         '''
@@ -117,10 +137,10 @@ class Game_map:
         '''
         for enemy in self.enemies:
             enemy.draw(self.win)
-            if enemy.getPosition() == (0,0):
+            if enemy.getPosition() == (0, 0):
                 del enemy
-                
-            #enemy.getPosition()
+
+            # enemy.getPosition()
 
         # display currency
         text = pygame.font.SysFont("comicsans", 40).render(str(self.money), 1, (0, 0, 0))
@@ -139,6 +159,10 @@ class Game_map:
 
         # draw menu
         self.menu.draw(self.win)
+
+        # draw main tower
+        self.main_tower.draw(self.win)
+
         pygame.display.update()
 
     def add_defense(self, name):
@@ -157,3 +181,4 @@ class Game_map:
 
 g = Game_map()
 g.run()
+

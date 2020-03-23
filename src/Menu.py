@@ -5,16 +5,17 @@ pygame.init()
 pygame.font.init()
 
 currency_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (60, 60))
-
 currency_img2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "crystal_1.png")), (20, 20))
+
+health_icon = pygame.transform.scale(pygame.image.load(os.path.join("images", "zip.png")), (10, 10))
 
 
 class Button:
     def __init__(self, menu, img, label):
         self.label = label
         self.img = img
-        self.x = menu.x - 50
-        self.y = menu.y - 110
+        self.x = menu.x + 75
+        self.y = menu.y - 103
         self.menu = menu
         self.width = self.img.get_width()
         self.height = self.img.get_height()
@@ -34,7 +35,7 @@ class Button:
 
 
 '''
-This class will be used for creating the menu 
+This class will be used for creating menus 
 '''
 
 
@@ -53,18 +54,16 @@ class Menu:
 
     def add_btn(self, img, name):
         self.items += 1
-        self.buttons.append(Button(self, img, name, 0))
+        self.buttons.append(Button(self, img, name))
 
     def get_item_cost(self):
         return self.price[self.tower.level - 1]
 
     def draw(self, win):
-        win.blit(self.background, (self.x - self.background.get_width() / 2, self.y - 120))
+        win.blit(self.background, (self.x + self.background.get_width() / 2, self.y - 110))
         for item in self.buttons:
             item.draw(win)
-            win.blit(currency_img, (item.x + item.width + 5, item.y - 9))
-            text = self.font.render(str(self.price[self.tower.level - 1]), 1, (255, 255, 255))
-            win.blit(text, (item.x + item.width + 30 - text.get_width() / 2, item.y + currency_img.get_height() - 8))
+            win.blit(health_icon, (item.x - 10, item.y ))
 
     def get_clicked(self, x1, y1):
         for button in self.buttons:
@@ -122,11 +121,7 @@ class Purchase_Menu(Menu):
         return -1
 
     def draw(self, win):
-        """
-        draws btns and menu bg
-        :param win: surface
-        :return: None
-        """
+        """draws purchase menu at the bottom"""
         win.blit(self.bg, (self.x - self.bg.get_width() / 2, self.y - 120))
         for item in self.buttons:
             item.draw(win)
