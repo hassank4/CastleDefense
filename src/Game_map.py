@@ -59,7 +59,7 @@ class Game_map:
         clock = pygame.time.Clock()
 
         while run:
-            if time.time() - self.time > 5:
+            if time.time() - self.time > 3:
                 self.time = time.time()
                 self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
             clock.tick(50)
