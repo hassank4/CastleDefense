@@ -1,5 +1,7 @@
 import pygame
 import os
+import random
+import time
 from src.Assassin import Assassin
 from src.Knight import WeakKnight
 from src.Archer import WeakArcher
@@ -40,6 +42,7 @@ class Game_map:
         self.enemies = []
         self.towers = []
         self.lives = 10
+        self.time = time.time()
         self.money = 1000
         self.wave = 0
         self.moving = False
@@ -58,10 +61,12 @@ class Game_map:
     def run(self):
         run = True
         clock = pygame.time.Clock()
-        self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
-        while run:
 
-            clock.tick(500)
+        while run:
+            if time.time() - self.time > 3:
+                self.time = time.time()
+                self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
+            clock.tick(50)
             # self.create_enemy()
 
             mouse_pos = pygame.mouse.get_pos()
@@ -115,7 +120,6 @@ class Game_map:
             if len(self.enemies) == 0:
                 self.wave += 1
                 self.current_wave = waves[self.wave]
-
         else:
             #    enemy_groups = [Mage(0), Assassin(0), Ogre(0)]
             for x in range(len(self.current_wave)):

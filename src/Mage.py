@@ -11,13 +11,7 @@ class Mage(Enemy):
     def __init__(self, id): # Constructor to create an Enemy object
         Enemy.__init__(self, id)
         self.speed = 3
-        image = []
-        for x in range(3):
-            image.append(pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk1.png')).convert_alpha(), (64, 64)))
-            image.append(pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk2.png')).convert_alpha(), (64, 64)))
-            image.append(pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk3.png')).convert_alpha(), (64, 64)))
-            image.append(pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk4.png')).convert_alpha(), (64, 64)))
-            image.append(pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk5.png')).convert_alpha(), (64, 64)))
+        image = [pygame.transform.scale(pygame.image.load(os.path.join(image_path, 'walk1.png')).convert_alpha(), (64, 64))]
         self.image = image
 
     def __str__(self): # Function to output Enemy health
