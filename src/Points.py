@@ -59,4 +59,4 @@ class Points:
         """
         Add the final score to the Database.
         """
-        db.insert(name, self.score)
+        self.db.insert(name, self.score)

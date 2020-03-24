@@ -1,6 +1,8 @@
 import os
 
 import pygame
+import math
+import time
 
 
 class Defense:
@@ -20,6 +22,12 @@ class Defense:
         self.idle_image = idle_image
         self.attack_image = attack_image
         self.moving = False
+        self.range = 200
+        self.inRange = False
+        self.timer = time.time()
+
+    def set_range(self, new_range):
+        self.range = new_range
 
     def get_id(self):
         """
@@ -147,5 +155,29 @@ class Defense:
         self.y = y
 
     def draw(self, win):
-        archer = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
-        win.blit(archer, (self.x - archer.get_width() // 2, self.y - archer.get_height() // 2))
+        defense = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
+        win.blit(defense, (self.x - defense.get_width() // 2, self.y - defense.get_height() // 2))
+
+    def attack(self, enemies, points):
+        self.inRange = False
+        closest_enemies = []
+        for enemy in enemies:
+            enemy_x, enemy_y = enemy.x, enemy.y
+            distance = math.sqrt((self.x - enemy_x)**2 + (self.y - enemy_y)**2)
+
+            if distance < self.range:
+                self.inRange = True
+                closest_enemies.append(enemy)
+
+        closest_enemies.sort(key=lambda x: x.x)
+        if len(closest_enemies) > 0:
+            first_enemy = closest_enemies[0]
+            
+            if time.time() - self.timer >= 0.5:
+                self.timer = time.time()
+                if first_enemy.subHealth(self.attack_damage):
+                    enemies.remove(first_enemy)
+                    points.update_score(first_enemy)
+
+            # if first_enemy.x < self.x:
+
