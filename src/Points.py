@@ -1,7 +1,7 @@
-from src.Assassin import Assassin
-from src.Mage import Mage
-from src.Ogre import Ogre
-from src.Database import Database
+from Assassin import Assassin
+from Mage import Mage
+from Ogre import Ogre
+from Database import Database
 
 
 class Points:

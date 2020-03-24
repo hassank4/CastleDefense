@@ -2,15 +2,17 @@ import pygame
 import os
 import random
 import time
-from src.Assassin import Assassin
-from src.Knight import WeakKnight
-from src.Archer import WeakArcher
-from src.Points import Points
-from src.Wizard import WeakWizard
-from src.Mage import Mage
-from src.Ogre import Ogre
-from src.Menu import Purchase_Menu
-from src.Tower import Tower
+
+from Assassin import Assassin
+from Knight import WeakKnight
+from Archer import WeakArcher
+from Points import Points
+from Wizard import WeakWizard
+from Mage import Mage
+from Ogre import Ogre
+from Menu import Purchase_Menu
+from Tower import Tower
+
 import random
 
 pygame.font.init()
@@ -61,6 +63,8 @@ class Game_map:
     def run(self):
         run = True
         clock = pygame.time.Clock()
+
+        Run.make_button("Quit", 800, 500, 150, 50)
 
         while run:
             if time.time() - self.time > 3:
@@ -183,6 +187,6 @@ class Game_map:
             print(str(e) + "NOT VALID NAME")
 
 
-g = Game_map()
-g.run()
+#g = Game_map()
+#g.run()
 
