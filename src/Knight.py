@@ -1,5 +1,5 @@
-from src.Defense import Defense
-from src.Projectile import Projectile
+from Defense import Defense
+from Projectile import Projectile
 
 
 class WeakKnight(Defense):
