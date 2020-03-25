@@ -142,11 +142,14 @@ class Game_map:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # if you're moving an object and click
+                    #pygame.draw.circle(self.win, (255, 0, 0), mouse_pos, 10, 0)
+                    #print(mouse_pos)
                     if self.moving_object:
-                        self.towers.append(self.moving_object)
+                        if (self.moving_object.place()):
+                            self.towers.append(self.moving_object)
 
-                        self.moving_object.moving = False
-                        self.moving_object = None
+                            self.moving_object.moving = False
+                            self.moving_object = None
                     else:
                         # Purchase defense menu clicked
                         purchase_button = self.menu.get_clicked(mouse_pos[0], mouse_pos[1])
