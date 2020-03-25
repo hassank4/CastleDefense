@@ -89,11 +89,11 @@ class Defense:
     def findClosestPoints(self, x, y):
         points = []
         for point in PATH:
-            dis = math.sqrt((x - point[0])**2 + (y-point[1])**2)
+            dis = math.sqrt((x - point[0])**2 + (y - point[1])**2)
             points.append([dis, point])
         points.sort(key=lambda x: x[0])
 
-        return points[0], points[1]
+        return points[0][1], points[1][1]
 
 
     def place(self):
@@ -109,7 +109,7 @@ class Defense:
         p1, p2 = self.findClosestPoints(x, y)
         m = findSlope(p1, p2)
         slope = -(1/m)
-        b = slope * x - y
+        b = (slope * x) * -1 + y
         line = lineFromPoints(p1, p2)
         point = findIntersection(line, [slope, b])
         
@@ -158,7 +158,7 @@ class Defense:
 def lineFromPoints(point1, point2): 
 
     m = findSlope(point1, point2)
-    b = m * point1[0] - point1[1]
+    b = (m * point1[0]) * -1 + point1[1]
     return [m, b]
     # a = point2[1] - point1[1] 
     # b = point1[0] - point2[0]  
