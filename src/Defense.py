@@ -4,7 +4,7 @@ import pygame
 import math
 import time
 
-
+PATH = [(260, 593), (238, 526), (131, 492), (80, 441), (106, 336), (130, 332), (238, 290), (259, 189), (300, 121), (414, 116), (532, 121), (548, 148), (570, 195), (576, 400), (630, 441), (986, 446)]
 class Defense:
     """
     This is the Defense Class that contains the essentials of a defense character in the game.
@@ -86,6 +86,16 @@ class Defense:
         """
         return self.attack_image
 
+    def findClosestPoints(self, x, y):
+        points = []
+        for point in PATH:
+            dis = math.sqrt((x - point[0])**2 + (y-point[1])**2)
+            points.append([dis, point])
+        points.sort(key=lambda x: x[0])
+
+        return points[0], points[1]
+
+
     def place(self, x, y):
         """
         Makes sure that the defense object is able to be placed down at the current coordinates and then
@@ -94,56 +104,19 @@ class Defense:
         # R: 141
         # G: 126
         # B: 123
+        width = 43294
+        p1, p2 = self.findClosestPoints(x, y)
+        m = findSlope(p1, p2)
+        slope = -(1/m)
+        b = slope * x - y
+        line = lineFromPoints(p1, p2)
+        point = findIntersection(line, [slope, b])
+        
+        distance = math.sqrt((x - point[0])**2 + (y - point[1])**2)
 
-        line_one = [(233, 595, [0, 1]),
-                    (233, 568, [0, 1, 2]),
-                    (180, 534, [1, 2, 3]),
-                    (80, 493, [2, 3, 4, 5]),
-                    (40, 416, [3, 4, 5]),
-                    (76, 304, [4, 5, 6]),
-                    (216, 250, [5, 6, 7]),
-                    (289, 92, [6, 7, 8]),
-                    (356, 66, [7, 8]),
-                    (557, 75, [8, 9]),
-                    (651, 183, [8, 9, 10]),
-                    (664, 386, [9, 10, 11]),
-                    (1063, 400, [11, 12])]  # len = 13
+        if distance <= width:
+            return False
 
-        line_two = [(318, 598),
-                    (317, 551),
-                    (268, 478),
-                    (154, 440),
-                    (132, 394),
-                    (156, 355),
-                    (292, 293),
-                    (327, 172),
-                    (546, 162),
-                    (562, 387),
-                    (648, 482),
-                    (874, 490),
-                    (1064, 483)]  # len = 13
-
-        for i in range(len(line_one)):
-            c_x = line_one[i][0]
-            c_y = line_one[i][1]
-            points = line_one[i][2]
-
-            if (i == 0):
-                if ((x >= c_x and x <= line_one[i + 1][0]) or (y >= c_y and y <= line_one[i + 1][1])):
-                    print("can't place here")
-                    return False
-            else:
-                if ((x >= c_x and x <= line_one[i + 1][0]) or (y >= c_y and y <= line_one[i + 1][1])):
-                    print("can't place here")
-                    return False
-                elif ((x <= c_x and x >= line_one[i - 1][0]) or (y <= c_y and y >= line_one[i - 1][1])):
-                    print("can't place here")
-                    return False
-
-            for j in points:
-                if ((x >= c_x and x <= line_two[j][0]) or (y >= c_y and y <= line_two[j][1])):
-                    print("can't place here")
-                    return False
         self.set_coordinates(x, y)
         return True
 
@@ -181,3 +154,27 @@ class Defense:
 
             # if first_enemy.x < self.x:
 
+def lineFromPoints(point1, point2): 
+
+    m = findSlope(point1, point2)
+    b = m * point1[0] - point1[1]
+    return [m, b]
+    # a = point2[1] - point1[1] 
+    # b = point1[0] - point2[0]  
+    # c = a*(point1[0]) + b*(point2[1])
+
+    # return [a,b,c]
+
+def findSlope(point1, point2):
+    dx = point1[0] - point2[0]
+    dy = point1[1] - point2[1]
+    m = dy / dx
+    return m
+
+
+def findIntersection(line1, line2):
+    m = line1[0] - line2[0]
+    b = line2[1] - line1[1]
+    x = b / m
+    y = line1[0] * x + line1[1]
+    return [x, y]
