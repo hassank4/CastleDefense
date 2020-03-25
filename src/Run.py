@@ -116,7 +116,7 @@ class Game_map:
 
         while run:
 
-            if time.time() - self.time > 3:
+            if time.time() - self.time > 1.8:
                 self.time = time.time()
                 self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
             clock.tick(50)
@@ -217,6 +217,22 @@ class Game_map:
 
         self.win.blit(text, (5, 1))
         self.win.blit(money, (76, 3))
+
+        # display score
+        score_text = pygame.font.SysFont("comicsans", 40).render("Score:", 1, (0, 0, 0))
+        score_number = pygame.font.SysFont("comicsans", 40).render(str(self.points.get_points()), 1, (0, 0, 0))
+        self.win.blit(score_text, (5, 30))
+        self.win.blit(score_number, (5, 55))
+
+        # display kills
+        kills_text = pygame.font.SysFont("comicsans", 30).render("Kills", 1, (0, 0, 0))
+        assassin_text = pygame.font.SysFont("comicsans", 25).render("Assassin: "+str(self.points.get_kills()[0]), 1, (0, 0, 0))
+        mage_text = pygame.font.SysFont("comicsans", 25).render("Mage: "+str(self.points.get_kills()[1]), 1, (0, 0, 0))
+        ogre_text = pygame.font.SysFont("comicsans", 25).render("Ogre: "+str(self.points.get_kills()[2]), 1, (0, 0, 0))
+        self.win.blit(kills_text, (5, 90))
+        self.win.blit(assassin_text, (5, 110))
+        self.win.blit(mage_text, (5, 125))
+        self.win.blit(ogre_text, (5, 140))
 
         # draw attack towers
         for tw in self.towers:
