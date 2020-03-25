@@ -96,7 +96,7 @@ class Defense:
         return points[0], points[1]
 
 
-    def place(self, x, y):
+    def place(self):
         """
         Makes sure that the defense object is able to be placed down at the current coordinates and then
         calls set_coordinates to place the defense object down.
@@ -104,7 +104,8 @@ class Defense:
         # R: 141
         # G: 126
         # B: 123
-        width = 43294
+        x, y = self.x, self.y
+        width = 100
         p1, p2 = self.findClosestPoints(x, y)
         m = findSlope(p1, p2)
         slope = -(1/m)
@@ -113,11 +114,11 @@ class Defense:
         point = findIntersection(line, [slope, b])
         
         distance = math.sqrt((x - point[0])**2 + (y - point[1])**2)
-
+        print(distance)
         if distance <= width:
             return False
 
-        self.set_coordinates(x, y)
+        #self.set_coordinates(x, y)
         return True
 
     def move(self, x, y):
