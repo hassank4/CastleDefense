@@ -55,8 +55,6 @@ class Points:
         """
         return [self.assassin_kills, self.mage_kills, self.ogre_kills]
 
-    def add_total_score(self, name):
-        """
-        Add the final score to the Database.
-        """
-        self.db.insert(name, self.score)
+    def set_score_to_zero(self):
+        self.score = 0
+        return self.score

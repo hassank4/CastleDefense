@@ -64,6 +64,7 @@ helpMenu2Img = pygame.image.load('Images/Help-Menu2.png')
 helpMenu3Img = pygame.image.load('Images/Help-Menu3.png')
 helpMenu4Img = pygame.image.load('Images/Help-Menu4.png')
 helpMenu5Img = pygame.image.load('Images/Help-Menu5.png')
+helpMenu6Img = pygame.image.load('Images/Help-Menu6.png')
 
 pauseMenuImg = pygame.image.load('Images/Pause-Menu.png')
 nameMenuImg = pygame.image.load('Images/Name-Screen.png')
@@ -113,7 +114,6 @@ class Game_map:
 
         global pause
         
-
         while run:
 
             if time.time() - self.time > 1.8:
@@ -266,6 +266,9 @@ class Game_map:
             print(str(e) + "NOT VALID NAME")
 
 
+
+# --------------------------- END OF GAME MAP CLASS --------------------------------------------------
+
 # CREATE INSTANCE OF THE GAME MAP
 global g 
 g = Game_map()
@@ -314,11 +317,10 @@ def helpmenu1():
                 pygame.quit()
                 quit()
 
-    
         gameDisplay.blit(helpMenu1Img, (0, 0))
 
         make_button("Next", 10, 520, 100, 50, bright_yellow, yellow, helpmenu2)
-        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
+       
 
         pygame.display.update()
         clock.tick(15)
@@ -335,7 +337,7 @@ def helpmenu2():
         gameDisplay.blit(helpMenu2Img, (0, 0))
 
         make_button("Next", 210, 520, 100, 50, bright_yellow, yellow, helpmenu3)
-        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
+        
 
         pygame.display.update()
         clock.tick(15)
@@ -352,7 +354,7 @@ def helpmenu3():
         gameDisplay.blit(helpMenu3Img, (0, 0))
 
         make_button("Next", 410, 520, 100, 50, bright_yellow, yellow, helpmenu4)
-        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
+        
 
         pygame.display.update()
         clock.tick(15)
@@ -369,7 +371,7 @@ def helpmenu4():
         gameDisplay.blit(helpMenu4Img, (0, 0))
 
         make_button("Next", 610, 520, 100, 50, bright_yellow, yellow, helpmenu5)
-        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
+        
 
         pygame.display.update()
         clock.tick(15)
@@ -385,8 +387,25 @@ def helpmenu5():
 
         gameDisplay.blit(helpMenu5Img, (0, 0))
 
-        make_button("Main", 810, 520, 100, 50, bright_yellow, yellow, start)
-        make_button("Quit", 820, 20, 150, 50, bright_red, red, quitgame)
+        make_button("Next", 810, 520, 100, 50, bright_yellow, yellow, helpmenu6)
+        
+
+        pygame.display.update()
+        clock.tick(15)
+
+def helpmenu6():
+    help = True
+
+    while help:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.blit(helpMenu6Img, (0, 0))
+
+        make_button("Main", 610, 520, 100, 50, bright_yellow, yellow, start)
+        
 
         pygame.display.update()
         clock.tick(15)
@@ -399,7 +418,6 @@ def gameloop():
     global g
 
     # CREATE GAME MAP INSTANCE
-    
     g = Game_map()
 
     gameloop = True
@@ -445,9 +463,10 @@ def name():
                         isLimitExceeded = True
                     elif(keys == 'space') and (not isLimitExceeded):
                         playerName += ' '
+                    elif(keys == 'return') and (not isLimitExceeded):
+                        playerName += ''
                     elif(not isLimitExceeded):
                         playerName += keys
-
 
                     largeText = pygame.font.Font('freesansbold.ttf', 30)
                     
@@ -455,13 +474,11 @@ def name():
                     TextRect.center = (510, 340)
                     gameDisplay.blit(nameMenuImg, (0, 0))
                     gameDisplay.blit(TextSurf, TextRect)
-
-            
+     
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        #gameDisplay.blit(nameMenuImg, (0, 0))
         if (len(playerName) > 0):
             make_button("Advance", 440, 500, 150, 50, bright_green, green, gameloop)
 
@@ -473,9 +490,13 @@ def highscores():
     highscores = True
 
     global g
+    global playerName
 
-    db.insert(playerName, g.points.get_points())
+    
+    if(playerName != ''):
+        db.insert(playerName, g.points.get_points())
 
+    
     while highscores:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -516,8 +537,6 @@ def highscores():
         pygame.display.update()
         clock.tick(15)
     
-
-
 def quitgame():
     pygame.quit()
     quit()
@@ -535,8 +554,6 @@ def paused():
                 pygame.quit()
                 quit()
                 
-
-
         gameDisplay.blit(pauseMenuImg, (0, 0))
 
         make_button("Resume", 150, 500, 150, 50, bright_green, green, unpaused)
