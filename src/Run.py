@@ -46,6 +46,7 @@ waves = [[5, 0, 0], [0, 5, 0], [0, 0, 5]]
 
 pause = False 
 playerName = ''
+check = False
 
 db = Database()
 
@@ -416,9 +417,12 @@ def gameloop():
     global pause
     global playerName
     global g
+    global check
 
     # CREATE GAME MAP INSTANCE
     g = Game_map()
+
+    check = True
 
     gameloop = True
 
@@ -491,10 +495,12 @@ def highscores():
 
     global g
     global playerName
+    global check
 
     
-    if(playerName != ''):
+    if(playerName != '' and check == True):
         db.insert(playerName, g.points.get_points())
+        check = False
 
     
     while highscores:
