@@ -25,6 +25,7 @@ class Defense:
         self.range = 200
         self.inRange = False
         self.timer = time.time()
+        self.pictureCount = 0
 
     def set_range(self, new_range):
         self.range = new_range
@@ -114,7 +115,7 @@ class Defense:
         point = findIntersection(line, [slope, b])
         
         distance = math.sqrt((x - point[0])**2 + (y - point[1])**2)
-        print(distance)
+       # print(distance)
         if distance <= width:
             return False
 
@@ -128,9 +129,26 @@ class Defense:
         self.x = x
         self.y = y
 
-    def draw(self, win):
-        defense = pygame.transform.scale(pygame.image.load(os.path.join(self.get_idle_image())), (75, 75))
-        win.blit(defense, (self.x - defense.get_width() // 2, self.y - defense.get_height() // 2))
+    def draw(self, surface):
+
+        if not self.moving:
+            self.pictureCount += 1
+            if self.pictureCount >= len(self.attack_image) * 6:
+                self.pictureCount = 0
+
+            if self.inRange:
+                pictures = self.get_attack_image()
+                picture = pictures[self.pictureCount//6]
+            else:
+                pictures = self.get_idle_image()
+                picture = pictures[self.pictureCount//6]
+        else:
+            self.pictureCount = 0
+            pictures = self.get_idle_image()
+            picture = pictures[self.pictureCount//6]
+            
+        defense = pygame.transform.scale(pygame.image.load(os.path.join(picture)), (75, 75))
+        surface.blit(defense, ((self.x - defense.get_width() // 2), (self.y - defense.get_height() // 2)))
 
     def attack(self, enemies, points):
         self.inRange = False
