@@ -178,7 +178,6 @@ class Game_map:
             self.draw()
 
            
-
     def create_enemy(self):
 
         if sum(self.current_wave) == 0:
@@ -266,7 +265,9 @@ class Game_map:
         except Exception as e:
             print(str(e) + "NOT VALID NAME")
 
-# CREATE GAME MAP INSTANCE
+
+# CREATE INSTANCE OF THE GAME MAP
+global g 
 g = Game_map()
 
 
@@ -395,15 +396,13 @@ def gameloop():
 
     global pause
     global playerName
+    global g
+
+    # CREATE GAME MAP INSTANCE
+    
+    g = Game_map()
 
     gameloop = True
- 
-    # insert player into the database
-    db.insert(playerName, 0)
-
-    playerName = ''
-
-    # print('player name was:' +  playerName)
 
     while gameloop:
         for event in pygame.event.get():
@@ -417,7 +416,7 @@ def gameloop():
                     paused()
        
         g.run()
-
+        
         pygame.display.update()
         clock.tick(15)
 
@@ -473,6 +472,10 @@ def name():
 def highscores():
     highscores = True
 
+    global g
+
+    db.insert(playerName, g.points.get_points())
+
     while highscores:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -484,9 +487,7 @@ def highscores():
         # Getting a list of all high scores from the database
         scores_lst = db.get_all_docs()
 
-
         largeText = pygame.font.Font('freesansbold.ttf', 30)
-
 
         scores_lst.sort(key=lambda x: x.get('score'), reverse=True)
 
