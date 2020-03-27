@@ -21,6 +21,7 @@ class Enemy:
         self.x = 260
         self.y = 593
         self.pictureCount = 0
+        self.flip = False
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"
@@ -60,6 +61,10 @@ class Enemy:
             self.y = self.y + change[1]
 
             if change[0] >= 0: # right
+                if self.flip:
+                    for i in range(len(self.image)):
+                        self.image[i] = pygame.transform.flip(self.image[i], True, False)
+                    self.flip = False
                 if change[1] >= 0: # down
                     if self.x >= x2+5 and self.y >= y2:
                         self.current += 1
@@ -67,6 +72,10 @@ class Enemy:
                     if self.x >= x2+5 and self.y <= y2:
                         self.current += 1
             else: # left
+                if not self.flip:
+                    for i in range(len(self.image)):
+                        self.image[i] = pygame.transform.flip(self.image[i], True, False)
+                    self.flip = True
                 if change[1] >= 0:  # down
                     if self.x <= x2+5 and self.y >= y2:
                         self.current += 1

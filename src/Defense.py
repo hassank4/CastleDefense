@@ -109,7 +109,10 @@ class Defense:
         width = 55
         p1, p2 = self.findClosestPoints(x, y)
         m = findSlope(p1, p2)
-        slope = -(1/m)
+        if m == 0:
+            slope = 100000000000000000
+        else:
+            slope = -(1/m)
         b = (slope * x) * -1 + y
         line = lineFromPoints(p1, p2)
         point = findIntersection(line, [slope, b])
@@ -187,6 +190,8 @@ def lineFromPoints(point1, point2):
 def findSlope(point1, point2):
     dx = point1[0] - point2[0]
     dy = point1[1] - point2[1]
+    if dx == 0:
+        dx += 0.000000000001
     m = dy / dx
     return m
 
