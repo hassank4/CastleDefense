@@ -24,6 +24,31 @@ Responsibilities:
 - Have animations for the defenses
 - Show the main tower which the enemies attack
 
+Collaborators:
+- Points
+- Tower
+
+Class name: Defense
+
+Responsibilites:
+- Able to attack the enemies and deal damage to health
+- Game score increases if an enemiy is killed with an attack
+- Able to find the closest enemy on the path to attack
+- Animated when idling in one spot
+- Animated when attacking an enemy
+
+Class name: Enemy
+
+Responsibilites:
+- Obtain whether the enemy is dead
+- Able to switch direction it faces on the path
+- Is animated to walk on the path
+
+Class name: Tower
+
+Responsibilites:
+- Able to draw the tower on the game
+- Know whether it was clicked on
 
 ## Software Architecture Diagram
 ![uml.png](https://github.com/UTMCSC301/project-ctrl-alt-elite/blob/master/doc/sprint%204/image/uml.png)
