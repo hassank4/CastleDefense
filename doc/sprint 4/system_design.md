@@ -26,4 +26,4 @@ Responsibilities:
 
 
 ## Software Architecture Diagram
-![uml.png](https://github.com/UTMCSC301/project-ctrl-alt-elite/blob/master/doc/sprint%303/image/uml.png)
+![uml.png](https://github.com/UTMCSC301/project-ctrl-alt-elite/blob/master/doc/sprint%204/image/uml.png)
