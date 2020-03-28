@@ -34,6 +34,7 @@ class Button:
         self.y = self.menu.y
 
 
+
 '''
 This class will be used for creating menus 
 '''
@@ -54,6 +55,10 @@ class Menu:
 
     def add_btn(self, img, name):
         self.items += 1
+        self.buttons.append(Button(self, img, name))
+
+    def edit_btn(self, img, name):
+        self.buttons.clear()
         self.buttons.append(Button(self, img, name))
 
     def get_item_cost(self):

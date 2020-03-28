@@ -3,7 +3,10 @@ import pygame
 import os
 
 menu_backg = pygame.transform.scale(pygame.image.load(os.path.join("images", "window_1.png")), (120, 30))
-tower_health_bar = pygame.transform.scale(pygame.image.load(os.path.join("images", "health_bar-06.png")), (100, 10))
+tower_health_bar_full = pygame.transform.scale(pygame.image.load(os.path.join("images", "health_bar-06.png")), (100, 10))
+tower_health_bar_half = pygame.transform.scale(pygame.image.load(os.path.join("images", "health_bar-01.png")), (100, 10))
+tower_health_bar_low = pygame.transform.scale(pygame.image.load(os.path.join("images", "health_bar-04.png")), (100, 10))
+
 
 
 class Tower:
@@ -15,7 +18,7 @@ class Tower:
         self.health = 100
         self.img_path = img_path
         self.menu2 = Menu(self, 770, 280, menu_backg, 0)
-        self.menu2.add_btn(tower_health_bar, "tower health")
+        #self.menu2.add_btn(tower_health_bar_full, "tower health")
 
         self.selected = False
 
@@ -43,6 +46,14 @@ class Tower:
             if 210 <= Y <= 210 + img.get_height():
                 return True
         return False
+
+    def edit_img(self, i):
+        if i == 1:
+            self.menu2.edit_btn(tower_health_bar_full, "tower health")
+        if i == 2:
+            self.menu2.edit_btn(tower_health_bar_half, "tower health")
+        elif i == 3:
+            self.menu2.edit_btn(tower_health_bar_low, "tower health")
 
     def draw(self, win):
         """Draw the tower onto the map"""
