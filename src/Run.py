@@ -169,7 +169,10 @@ class Game_map:
                                 self.main_tower.selected = False
 
             for tower in self.towers:
+                current_points = self.points.get_points()
                 tower.attack(self.enemies, self.points)
+                new_points = self.points.get_points()
+                self.money += (new_points - current_points)
 
             if self.main_tower.get_health() <= 0:
                 print("Tower health = 0")
