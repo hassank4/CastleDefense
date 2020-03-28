@@ -2,6 +2,7 @@ from Enemy import Enemy
 from Tower import Tower
 import pygame
 import os
+import math
 
 current_path = os.path.dirname(__file__) # Where your .py file is located
 resource_path = os.path.join(current_path, 'Images') # The resource folder path
@@ -21,6 +22,8 @@ class Ogre(Enemy):
         return "Tank " + str(self.id) + ": " + str(self.health) + " Health"
 
     def attack(self, tower):
-        tower.take_damage(7)
+        distance = math.sqrt((self.x - 790) ** 2 + (self.y - 210) ** 2)
+        if distance < 250:
+            tower.take_damage(6)
         
 

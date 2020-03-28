@@ -120,6 +120,9 @@ class Game_map:
             if time.time() - self.time > 1.8:
                 self.time = time.time()
                 self.enemies.append(random.choice([Mage(0), Assassin(0), Ogre(0)]))
+
+
+
             clock.tick(50)
             # self.create_enemy()
 
@@ -171,8 +174,17 @@ class Game_map:
             for tower in self.towers:
                 tower.attack(self.enemies, self.points)
 
+            for enemy in self.enemies:
+                enemy.attack(self.main_tower)
+
+            if self.main_tower.get_health() > 80:
+                self.main_tower.edit_img(1)
+            elif 20 < self.main_tower.get_health() < 80:
+                self.main_tower.edit_img(2)
+            elif 0 < self.main_tower.get_health() < 20:
+                self.main_tower.edit_img(3)
+
             if self.main_tower.get_health() <= 0:
-                print("Tower health = 0")
                 run = False
                 self.game = False
 
@@ -210,6 +222,7 @@ class Game_map:
         for enemy in self.enemies:
             enemy.draw(self.win)
             if enemy.getPosition() == (0, 0):
+                enemy.attack(self.main_tower)
                 del enemy
 
             # enemy.getPosition()
@@ -229,6 +242,7 @@ class Game_map:
 
         # display kills
         kills_text = pygame.font.SysFont("comicsans", 30).render("Kills", 1, (0, 0, 0))
+        main_tower_text = pygame.font.SysFont("comicsans", 25).render("Main Tower Health: " + str(self.main_tower.get_health()), 1, (0, 0, 0))
         assassin_text = pygame.font.SysFont("comicsans", 25).render("Assassin: "+str(self.points.get_kills()[0]), 1, (0, 0, 0))
         mage_text = pygame.font.SysFont("comicsans", 25).render("Mage: "+str(self.points.get_kills()[1]), 1, (0, 0, 0))
         ogre_text = pygame.font.SysFont("comicsans", 25).render("Ogre: "+str(self.points.get_kills()[2]), 1, (0, 0, 0))
@@ -236,6 +250,7 @@ class Game_map:
         self.win.blit(assassin_text, (5, 110))
         self.win.blit(mage_text, (5, 125))
         self.win.blit(ogre_text, (5, 140))
+        self.win.blit(main_tower_text, (5, 155))
 
         # draw attack towers
         for tw in self.towers:
