@@ -177,8 +177,8 @@ class Game_map:
                 new_points = self.points.get_points()
                 self.money += (new_points - current_points)
 
-            for enemy in self.enemies:
-                enemy.attack(self.main_tower)
+            # for enemy in self.enemies:
+            #     enemy.attack(self.main_tower)
 
             if self.main_tower.get_health() > 80:
                 self.main_tower.edit_img(1)
@@ -216,7 +216,7 @@ class Game_map:
         self.win.blit(self.background, (0, 0))
         make_button("Surrender", 300, 10, 150, 50, bright_yellow, yellow, highscores)
         make_button("Quit", 500, 10, 150, 50, bright_red, red, quitgame)
-
+    
         '''
         # display enemies
         for enemy in self.enemies:
@@ -224,7 +224,9 @@ class Game_map:
         '''
         for enemy in self.enemies:
             enemy.draw(self.win)
-            if enemy.getPosition() == (0, 0):
+            pos = enemy.getPosition()
+            if pos[0] >= 990 and not enemy.hasDoneDamage():
+                enemy.setDoneDamageTrue()
                 enemy.attack(self.main_tower)
                 del enemy
 
@@ -255,6 +257,10 @@ class Game_map:
         self.win.blit(ogre_text, (5, 140))
         self.win.blit(main_tower_text, (5, 155))
 
+        # draw main tower
+
+        self.main_tower.draw(self.win)
+
         # draw attack towers
         for tw in self.towers:
             tw.draw(self.win)
@@ -266,8 +272,6 @@ class Game_map:
         # draw menu
         self.menu.draw(self.win)
 
-        # draw main tower
-        self.main_tower.draw(self.win)
 
         pygame.display.update()
 

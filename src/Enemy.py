@@ -22,9 +22,16 @@ class Enemy:
         self.y = 593
         self.pictureCount = 0
         self.flip = False
+        self.doneDamage = False
 
     def __str__(self): # Function to output Enemy health
         return "Enemy " + str(self.id) + ": " + str(self.health) + " Health"
+
+    def hasDoneDamage(self):
+        return self.doneDamage
+
+    def setDoneDamageTrue(self):
+        self.doneDamage = True
 
     def getHealth(self): # Function to get the Enemy health
         return self.health

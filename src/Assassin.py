@@ -22,6 +22,4 @@ class Assassin(Enemy):
         return "Assassin " + str(self.id) + ": " + str(self.health) + " Health"
 
     def attack(self, tower):
-        distance = math.sqrt((self.x - 790) ** 2 + (self.y - 210) ** 2)
-        if distance < 200:
-            tower.take_damage(2)
+        tower.take_damage(2)

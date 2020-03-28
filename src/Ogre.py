@@ -22,8 +22,6 @@ class Ogre(Enemy):
         return "Tank " + str(self.id) + ": " + str(self.health) + " Health"
 
     def attack(self, tower):
-        distance = math.sqrt((self.x - 790) ** 2 + (self.y - 210) ** 2)
-        if distance < 250:
-            tower.take_damage(6)
+        tower.take_damage(6)
         
 
