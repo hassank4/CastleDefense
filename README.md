@@ -7,7 +7,7 @@ where enemies try to reach the end of a map while the player tries to place defe
 
 ![start menu](https://user-images.githubusercontent.com/47669299/78315880-4089b980-752c-11ea-8075-9fde0da29656.png)
 ![help menu](https://user-images.githubusercontent.com/47669299/78316018-9cecd900-752c-11ea-90b7-6bcb339e75a9.png)
-![game play](https://user-images.githubusercontent.com/47669299/78316035-a5ddaa80-752c-11ea-9806-5260e613d78a.png)
+![game](https://user-images.githubusercontent.com/47669299/78320963-c57ad000-7538-11ea-9f89-7dc9e109cea3.png)
 ![user highscore](https://user-images.githubusercontent.com/47669299/78316072-b68e2080-752c-11ea-96a4-3b05f377a171.png)
 
 ### Requirements
