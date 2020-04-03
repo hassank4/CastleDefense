@@ -24,11 +24,11 @@ download page will be below.
 [Python3](https://www.python.org/downloads/)
 
 
-2) You will need to install Wing for Python if you need to use 
+2) You will need to install PyCharm for Python if you need to use 
 option 2 to run the game (next topic in README). The link to download 
-wing is below.
+pycharm is below.
 
-[Wing](https://wingware.com/downloads/wing-personal)
+[PyCharm IDE](https://www.jetbrains.com/pycharm/download/#section=mac)
 
 
 3) You will also need to install pygame. Open up Windows PowerShell or the Terminal,
@@ -78,10 +78,8 @@ There are 2 options to run this game. 'Option 2' is to be used if
     C:\Users\<User Name>\project-ctrl-alt-elite\src
     ```
     
-    3) Open 'Run.py' with Wing
-    4) When the file opens, run the game by pressing 'f5' or
-        by clicking the green play button at the top of your
-        screen
+    3) Open 'Run.py' with PyCharm
+    4) When the file opens, run the game by clicking the green play button at the top of your screen
 
 ### How to Play
 
@@ -109,8 +107,8 @@ able to see.
 
 * [Python](https://www.python.org/downloads/)
 * [Pygame](https://www.pygame.org/wiki/GettingStarted)
-* The Pymongo library to interact with MongoDB
-* [Wing](https://wingware.com/downloads/wing-personal)
+* [Pymongo](https://api.mongodb.com/python/current/)
+* [PyCharm](https://www.jetbrains.com/pycharm/download/#section=mac)
 
 ### Authors
 
